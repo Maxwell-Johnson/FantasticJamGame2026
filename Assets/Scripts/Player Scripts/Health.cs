@@ -2,15 +2,30 @@ using UnityEngine;
 
 public class Health : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+
+    [SerializeField] private float maxHealth = 3;
+    public float currentHealth { get; private set; } //allows other scripts to GET this value, but only this script can SET this value
+
+    private void Awake()
+    {
+        currentHealth = maxHealth;
+    }
+    
+    public void TakeDamage(float _damage)
     {
         
+        if (currentHealth > 0)
+        {
+            currentHealth = Mathf.Clamp(currentHealth - _damage, 0, maxHealth); //Clamp makes sure this value is never allowed to go below 0 when subtracing
+        }
+        else
+        {
+            //player dead
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.tag == "Obstacle") TakeDamage(1); //If collide with obstacle, ouchie
     }
 }
