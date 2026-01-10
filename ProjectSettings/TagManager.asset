@@ -2,8 +2,11 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Walls
+  - Water
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -41,3 +44,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3940363763
+    locked: 0
+  - name: Water
+    uniqueID: 2555881811
+    locked: 0
+  - name: Player
+    uniqueID: 2490747497
+    locked: 0
+  - name: Obstacles
+    uniqueID: 51328281
+    locked: 0
+  - name: Walls
+    uniqueID: 3137173121
+    locked: 0
+  m_RenderingLayers:
+  - Default
