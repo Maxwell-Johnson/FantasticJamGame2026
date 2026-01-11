@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -16,10 +17,10 @@ public class Player_Controller : MonoBehaviour
     #region MOVEMENT
 
     private float moveSpeedX = 3f;
-    private float moveSpeedY = 7f;
+    private float moveSpeedY = 6f;
     private Vector2 moveInput;
 
-    private float playerDragSpeed = -2.4f;
+    private float playerDragSpeed = -2f;
 
     #endregion
 
@@ -39,7 +40,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnDisable()
     {
-        InputActions.FindActionMap("Player").Disable();
+        //InputActions.FindActionMap("Player").Disable();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +49,7 @@ public class Player_Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>(); //Gets the Rigidbody2D component from whatever this script is attached to.
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
+        
     }
 
     // Update is called once per frame
@@ -62,6 +64,8 @@ public class Player_Controller : MonoBehaviour
             Debug.Log("Attack!");
             Attack(); //Attacks when attack button is pressed
         }
+
+        
     }
 
     void Attack()
@@ -74,6 +78,7 @@ public class Player_Controller : MonoBehaviour
             //Play Animation here
         }
     }
+
 
     void CheckAttackTimer()
     {

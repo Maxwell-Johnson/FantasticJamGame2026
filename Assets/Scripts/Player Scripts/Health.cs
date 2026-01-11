@@ -11,16 +11,17 @@ public class Health : MonoBehaviour
         currentHealth = maxHealth;
     }
     
-    public void TakeDamage(float _damage)
+    public void TakeDamage(float damage)
     {
         
         if (currentHealth > 0)
         {
-            currentHealth = Mathf.Clamp(currentHealth - _damage, 0, maxHealth); //Clamp makes sure this value is never allowed to go below 0 when subtracing
-        }
-        else
-        {
-            //player dead
+            currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth); //Clamp makes sure this value is never allowed to go below 0 when subtracing
+            if (currentHealth == 0)
+            {
+                Debug.Log("I DEAD");
+                Destroy(gameObject);
+            }
         }
     }
 
