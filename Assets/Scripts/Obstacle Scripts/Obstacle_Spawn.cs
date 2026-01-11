@@ -4,7 +4,9 @@ using UnityEngine.Rendering;
 public class Obstacle_Spawn : MonoBehaviour
 {
     public GameObject obstacle;
-    public float spawnRate = 2;
+    public float spawnRate = 1;
+    public float maxSpawnRate = 3f;
+    public float minSpawnRate = 0.1f;
     private float timer = 0;
 
     //Boundries on left and right walls for spawning obstacles
@@ -12,12 +14,14 @@ public class Obstacle_Spawn : MonoBehaviour
     private float rightBound = 4.5f;
     void Start()
     {
-        spawnPipe();
+        spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
+        spawnObstacle();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        
         //Checks if enough time has passed between obstacle spawns
         if (timer < spawnRate)
         {
@@ -25,12 +29,14 @@ public class Obstacle_Spawn : MonoBehaviour
         }
         else
         {
-            spawnPipe();
+            spawnObstacle();
+            //Debug.Log(spawnRate);
             timer = 0;
+            spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
         }
     }
 
-    void spawnPipe()
+    void spawnObstacle()
     {
         //Spawns an obstacle between the bounds of the left and right walls
         Instantiate(obstacle, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation);

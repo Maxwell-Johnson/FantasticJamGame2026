@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3566193385525408906}
   - component: {fileID: 2975890781052997645}
-  - component: {fileID: 4606003500759367963}
   - component: {fileID: 2551425877526576658}
   - component: {fileID: 455998489371735690}
   - component: {fileID: 2988016361911992158}
@@ -49,18 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle_Move
   moveSpeed: 5
---- !u!114 &4606003500759367963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4443223612022150452}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8eb5cd2b285f041999d9df7c3f1bde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Enemy_Properties
 --- !u!212 &2551425877526576658
 SpriteRenderer:
   serializedVersion: 2
@@ -107,7 +94,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 51328281
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300112, guid: 29c9cded5e558164aaf8c9bf08aa1510, type: 3}
