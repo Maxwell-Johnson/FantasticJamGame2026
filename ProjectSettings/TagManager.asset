@@ -8,6 +8,7 @@ TagManager:
   - Water
   - Obstacle
   - Player Attack
+  - Leaderboard Logic
   layers:
   - Default
   - TransparentFX
