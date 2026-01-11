@@ -1,0 +1,75 @@
+using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using static Stats_Manager;
+
+public class Game_Manager : MonoBehaviour
+{
+
+    public static Game_Manager Instance;
+
+    public GameState state;
+
+    //An event allows other scripts to subscribe to it and activate a function whenever the value is changed
+    public static event Action<GameState> OnGameStateChanged;
+
+    //Grabs the functionality from Input manager to read if someone presses the reset button
+    InputAction restartAction;
+
+
+    public void updateGameState(GameState newState)
+    {
+        state = newState;
+
+        //Each of these cases will run depending on the gamestate
+        switch (newState)
+        {
+            case GameState.GameRunning:
+                break;
+            case GameState.GamePaused:
+                break;
+            case GameState.PlayerDead:
+                break;
+            case GameState.GameReset:
+                break;
+        }
+
+        OnGameStateChanged?.Invoke(newState);
+
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+
+
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        restartAction = InputSystem.actions.FindAction("Restart");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (restartAction.WasPressedThisFrame())
+        {
+            //Debug.Log("RESTART");
+            SceneManager.LoadScene(0);
+
+        }
+    }
+}
+
+public enum GameState
+{
+    GameRunning,
+    GamePaused,
+    PlayerDead,
+    GameReset
+
+}
