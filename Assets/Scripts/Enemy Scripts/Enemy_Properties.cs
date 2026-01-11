@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy_Properties : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField] public float maxHealth = 1f;
+    [SerializeField] public float maxHealth = 2f;
     private float currentHealth;
 
     private Health playerHealth;
