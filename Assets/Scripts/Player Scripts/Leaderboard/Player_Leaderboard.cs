@@ -18,11 +18,27 @@ public class Player_Leaderboard : MonoBehaviour
     public int placeHolderScoreReference = 10;
     public Text inputScore_varTypeSubjectToChange;
 
+
+
     private void Start()
     {
-        scoreTextUpdater = GameObject.FindGameObjectWithTag("Leaderboard Logic").GetComponent<Current_Score_Text_Updater>();
-        getLeaderboard();
-        loadLeaderboardScreen();
+        Game_Manager.OnGameStateChanged += LoadLeaderboard;
+        
+    }
+
+    private void OnDestroy()
+    {
+        Game_Manager.OnGameStateChanged -= LoadLeaderboard;
+    }
+
+    public void LoadLeaderboard(GameState gameState)
+    {
+        if (gameState == GameState.PlayerDead)
+        {
+            scoreTextUpdater = GameObject.FindGameObjectWithTag("Leaderboard Logic").GetComponent<Current_Score_Text_Updater>();
+            getLeaderboard();
+            loadLeaderboardScreen();
+        }
     }
 
     // Fetches leaderboard data

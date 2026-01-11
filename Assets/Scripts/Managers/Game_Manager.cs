@@ -17,8 +17,9 @@ public class Game_Manager : MonoBehaviour
     //Grabs the functionality from Input manager to read if someone presses the reset button
     InputAction restartAction;
 
+    private Scene currentScene;
 
-    public void updateGameState(GameState newState)
+    public void UpdateGameState(GameState newState)
     {
         state = newState;
 
@@ -58,8 +59,11 @@ public class Game_Manager : MonoBehaviour
     {
         if (restartAction.WasPressedThisFrame())
         {
+            currentScene = SceneManager.GetActiveScene();
             //Debug.Log("RESTART");
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(currentScene.name);
+            UpdateGameState(GameState.GameReset);
+            UpdateGameState(GameState.GameRunning);
 
         }
     }

@@ -9,6 +9,7 @@ TagManager:
   - Obstacle
   - Player Attack
   - Leaderboard Logic
+  - Enemy Spawner 1
   layers:
   - Default
   - TransparentFX
@@ -58,11 +59,17 @@ TagManager:
   - name: Enemies
     uniqueID: 1320482313
     locked: 0
+  - name: Pickups
+    uniqueID: 2026064145
+    locked: 0
   - name: Player
     uniqueID: 2490747497
     locked: 0
   - name: Walls
     uniqueID: 3137173121
+    locked: 0
+  - name: DEV LAYER
+    uniqueID: 4234555421
     locked: 0
   m_RenderingLayers:
   - Default
