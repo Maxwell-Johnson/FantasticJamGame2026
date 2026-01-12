@@ -5,14 +5,24 @@ using UnityEngine.UI;
 public class Score_Manager : MonoBehaviour
 {
     [SerializeField]
-    private Text inputScore_varTypeSubjectToChange;
+    private Text scoreText;
     [SerializeField]
     private TMP_InputField inputName;
 
+    public Player_Leaderboard playerLeaderboard;
+
     public UnityEvent<string, int> submitScoreEvent;
+
+    public void setScoreText(Text text)
+    {
+        scoreText = text;
+    }
     public void submitScore()
     {
-        submitScoreEvent.Invoke(inputName.text, int.Parse(inputScore_varTypeSubjectToChange.text));
+        playerLeaderboard.getLeaderboard();
+        submitScoreEvent.Invoke(inputName.text, int.Parse(scoreText.text));
+        playerLeaderboard.getLeaderboard();
+
     }
 
 }

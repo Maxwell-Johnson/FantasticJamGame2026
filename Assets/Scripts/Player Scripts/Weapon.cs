@@ -8,7 +8,7 @@ public class Weapon : MonoBehaviour
     {
         Enemy_Properties enemy = collision.GetComponent<Enemy_Properties>(); //Grabs Enemy_Properties script from triggered object if it has it
 
-        if (enemy != null) enemy.TakeDamage(damage); //If the triggered object does have the Enemy_Properties script, it will run their takedamage function
+        if (enemy != null) enemy.TakeDamage(damage, transform.parent); //If the triggered object does have the Enemy_Properties script, it will run their takedamage function
     }
 
 }

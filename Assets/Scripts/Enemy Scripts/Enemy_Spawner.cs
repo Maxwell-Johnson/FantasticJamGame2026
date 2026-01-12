@@ -6,6 +6,7 @@ using UnityEngine;
 public class Enemy_Spawner : MonoBehaviour
 {
     public GameObject enemy;
+    public GameObject enemiesFolder;
     public float spawnRate;
     public float maxSpawnRate = 7f;
     public float minSpawnRate = 5f;
@@ -50,7 +51,7 @@ public class Enemy_Spawner : MonoBehaviour
         //Spawns an obstacle between the bounds of the left and right walls
         if (enemyList.Count < maxSpawnAmount)
         {
-            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation));
+            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
         }
         
     }

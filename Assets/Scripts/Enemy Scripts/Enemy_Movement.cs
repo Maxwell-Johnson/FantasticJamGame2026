@@ -5,25 +5,12 @@ using UnityEngine.Events;
 public class Enemy_Movement : MonoBehaviour
 {
 
-    public float moveSpeed = 3f;
+    public float moveSpeed = 5f;
     Rigidbody2D rb;
     Transform followTarget;
     Vector2 moveDirection;
+    private bool takingKnockback;
 
-    private float knockbackStrength = 16f;
-    private float knockbackDelay = 0.15f;
-
-    public UnityEvent onBegin, OnDone;
-
-
-    //public void 
-
-    private IEnumerator Reset()
-    {
-        yield return new WaitForSeconds(knockbackDelay);
-        rb.linearVelocity = Vector3.zero;
-        OnDone?.Invoke();
-    }
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -57,9 +44,19 @@ public class Enemy_Movement : MonoBehaviour
     private void FixedUpdate()
     {
         //Uses the normalized direction to move object in the direction of the player by move speed
-        if (followTarget)
+        if (followTarget && !takingKnockback)
         {
             rb.linearVelocity = new Vector2(moveDirection.x, moveDirection.y) * moveSpeed;
         }
+    }
+
+    public void takingKnockbackTrue()
+    {
+        takingKnockback = true;
+    }
+
+    public void takingKnockbackFalse()
+    {
+        takingKnockback = false;
     }
 }

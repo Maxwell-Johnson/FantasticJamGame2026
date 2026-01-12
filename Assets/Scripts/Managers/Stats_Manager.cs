@@ -8,6 +8,7 @@ using static Game_Manager;
 public class Stats_Manager : MonoBehaviour
 {
     public static Stats_Manager Instance;
+    public Player_Leaderboard leaderboard;
 
     //These variables keep track of the various stats across the game
     public int skullsCollected { get; private set; }
@@ -20,12 +21,20 @@ public class Stats_Manager : MonoBehaviour
 
         //Subscribes to State Change function in Game Manager with the Reset Stats function; runs if state changes
         Game_Manager.OnGameStateChanged += ResetStats;
+        Game_Manager.OnGameStateChanged += SendFinalScore;
+
+    }
+
+    private void SendFinalScore(GameState state)
+    {
+        leaderboard.SendPlayerScore(skullsCollected);
     }
 
     private void OnDestroy()
     {
         //Unsubscribes to prevent memeory leaks and errors
         Game_Manager.OnGameStateChanged -= ResetStats;
+        Game_Manager.OnGameStateChanged -= SendFinalScore;
     }
 
     private void ResetStats(GameState gameState)
@@ -39,13 +48,19 @@ public class Stats_Manager : MonoBehaviour
         }
     }
 
-    public void enemyDefeated()
+    public void EnemyDefeated()
     {
         enemiesDefeated++;
+        
     }
 
-    public void skullCollected(int value)
+    public void SkullCollected(int value)
     {
         skullsCollected += value;
+    }
+
+    public void GrabCurrentScore(int currentScore)
+    {
+        currentScore = skullsCollected;
     }
 }

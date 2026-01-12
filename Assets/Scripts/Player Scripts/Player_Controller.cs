@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -16,11 +17,11 @@ public class Player_Controller : MonoBehaviour
 
     #region MOVEMENT
 
-    private float moveSpeedX = 3f;
+    private float moveSpeedX = 4f;
     private float moveSpeedY = 6f;
     private Vector2 moveInput;
 
-    private float playerDragSpeed = -2f;
+    private float playerPushSpeed;
 
     #endregion
 
@@ -28,8 +29,9 @@ public class Player_Controller : MonoBehaviour
 
     [SerializeField] public GameObject attack;
     private bool isAttacking = false;
-    private float attackDuration = 0.3f;
-    private float attackTimer = 0f;
+    private float attackDuration = 0.2f;
+    private float attackCooldown = 0.8f;
+    private bool canAttack;
 
     #endregion
 
@@ -49,52 +51,44 @@ public class Player_Controller : MonoBehaviour
         rb = GetComponent<Rigidbody2D>(); //Gets the Rigidbody2D component from whatever this script is attached to.
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
+        canAttack = true;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveInput = moveAction.ReadValue<Vector2>(); //Grabs the vector2 value from the Input Actions system "Move" and set it to moveInput
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeedX, (moveInput.y * moveSpeedY) + playerDragSpeed); //Changes the x and y velocity values using x and y of moveInput times movespeed
 
-        CheckAttackTimer(); //Checks the status of attack timer
-        if (attackAction.WasPressedThisFrame())
+        if (moveInput.y < 0)
         {
-            Debug.Log("Attack!");
-            Attack(); //Attacks when attack button is pressed
+            playerPushSpeed = 0f;
+        }
+        else
+        {
+            playerPushSpeed = -2f;
+        }
+        moveInput = moveAction.ReadValue<Vector2>(); //Grabs the vector2 value from the Input Actions system "Move" and set it to moveInput
+        rb.linearVelocity = new Vector2(moveInput.x * moveSpeedX, (moveInput.y * moveSpeedY) + playerPushSpeed); //Changes the x and y velocity values using x and y of moveInput times movespeed
+
+        if (attackAction.WasPressedThisFrame() && canAttack)
+        {
+            StartCoroutine(Attack(attackCooldown));
         }
 
         
     }
 
-    void Attack()
+
+    IEnumerator Attack(float attackCooldown)
     {
-        //If player is not currently attacking, does attack.
-        if (!isAttacking)
-        {
-            attack.SetActive(true);
-            isAttacking = true;
-            //Play Animation here
-        }
-    }
-
-
-    void CheckAttackTimer()
-    {
-
-        //If player is attacking, adds current time (Deltatime) to the attack timer, and if the attack duration is less than timer, changes it back to false and resets timer.
-        if (isAttacking)
-        {
-            attackTimer += Time.deltaTime;
-            if (attackTimer >= attackDuration)
-            {
-                attackTimer = 0;
-                isAttacking = false;
-                attack.SetActive(false);
-            }
-        }
-
+        isAttacking = true;
+        canAttack = false;
+        attack.SetActive(true);
+        yield return new WaitForSeconds(attackDuration);
+        attack.SetActive(false);
+        isAttacking = false;
+        yield return new WaitForSeconds(attackCooldown);
+        canAttack = true;
     }
 
 }

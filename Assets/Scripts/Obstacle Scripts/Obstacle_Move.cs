@@ -13,7 +13,7 @@ public class Obstacle_Move : MonoBehaviour
     private void Awake()
     {
         moveSpeed = Random.Range(minFallSpeed, maxFallSpeed);
-        Debug.Log(moveSpeed);
+        //Debug.Log(moveSpeed);
     }
     // Update is called once per frame
     void Update()

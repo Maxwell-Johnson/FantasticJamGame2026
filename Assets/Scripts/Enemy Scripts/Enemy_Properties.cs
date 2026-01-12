@@ -3,6 +3,7 @@ using UnityEngine;
 public class Enemy_Properties : MonoBehaviour
 {
     private Rigidbody2D rb;
+    private Knockback_Feedback knockbackScript;
     [SerializeField] public float maxHealth = 2f;
     private float currentHealth;
 
@@ -12,10 +13,14 @@ public class Enemy_Properties : MonoBehaviour
 
     private GameObject spawner;
 
+
+    public GameObject skullPrefab;
+
     private void Awake()
     {
         spawner = GameObject.FindGameObjectWithTag("Enemy Spawner 1");
         rb = GetComponent<Rigidbody2D>();
+        knockbackScript = GetComponent<Knockback_Feedback>();
     }
     void Start()
     {
@@ -26,12 +31,16 @@ public class Enemy_Properties : MonoBehaviour
     {
         playerHealth.TakeDamage(attackDamage);
     }
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, Transform weaponTransform)
     {
         currentHealth -= damage;
-        spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
-        if (currentHealth <= 0) Destroy(gameObject); //if health 0, dead
+        
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
 
+        knockbackScript.Knockback(weaponTransform);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,5 +52,17 @@ public class Enemy_Properties : MonoBehaviour
             playerHealth = collision.gameObject.GetComponent<Health>();
             damagePlayer();
         }
+    }
+
+    private void Die()
+    {
+        Vector3 deathPosition = gameObject.transform.position;
+        Quaternion deathQuaternion = gameObject.transform.rotation;
+        Pickups_Manager.Instance.SpawnSkullPickup(deathPosition, deathQuaternion);
+
+        Stats_Manager.Instance.EnemyDefeated();
+
+        spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
+        Destroy(gameObject); //if health 0, dead
     }
 }

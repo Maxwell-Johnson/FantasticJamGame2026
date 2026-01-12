@@ -4,6 +4,8 @@ using UnityEngine.Rendering;
 public class Obstacle_Spawn : MonoBehaviour
 {
     public GameObject obstacle;
+    public GameObject obstaclesFolder;
+
     public float spawnRate = 1;
     public float maxSpawnRate = 3f;
     public float minSpawnRate = 0.1f;
@@ -39,6 +41,6 @@ public class Obstacle_Spawn : MonoBehaviour
     void spawnObstacle()
     {
         //Spawns an obstacle between the bounds of the left and right walls
-        Instantiate(obstacle, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation);
+        Instantiate(obstacle, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);
     }
 }

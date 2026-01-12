@@ -15,8 +15,9 @@ public class Player_Leaderboard : MonoBehaviour
         "190acc66e8f864f83f6c6bb6821464743e769870e908a28f90ad8d8da6a4b377";
     public GameObject leaderboardScreenToggle;
     private Current_Score_Text_Updater scoreTextUpdater;
-    public int placeHolderScoreReference = 10;
-    public Text inputScore_varTypeSubjectToChange;
+    public Score_Manager scoreManager;
+    public Text playerScoreText;
+    private int currentPlayerScore;
 
 
 
@@ -35,10 +36,17 @@ public class Player_Leaderboard : MonoBehaviour
     {
         if (gameState == GameState.PlayerDead)
         {
+            
             scoreTextUpdater = GameObject.FindGameObjectWithTag("Leaderboard Logic").GetComponent<Current_Score_Text_Updater>();
+            
             getLeaderboard();
             loadLeaderboardScreen();
         }
+    }
+
+    public void SendPlayerScore(int playerScore)
+    {
+        currentPlayerScore = playerScore;
     }
 
     // Fetches leaderboard data
@@ -69,8 +77,10 @@ public class Player_Leaderboard : MonoBehaviour
     // Remember to reference this whenever game over happens
     public void loadLeaderboardScreen()
     {
+        
         leaderboardScreenToggle.SetActive(true);
-        scoreTextUpdater.updateCurrentScore(inputScore_varTypeSubjectToChange, placeHolderScoreReference);
+        scoreManager.setScoreText(playerScoreText);
+        scoreTextUpdater.updateCurrentScore(playerScoreText, currentPlayerScore);
 
     }
 }
