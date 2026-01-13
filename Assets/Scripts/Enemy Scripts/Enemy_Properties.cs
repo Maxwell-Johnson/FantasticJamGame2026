@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Enemy_Properties : MonoBehaviour
@@ -13,8 +14,19 @@ public class Enemy_Properties : MonoBehaviour
 
     private GameObject spawner;
 
+    public bool enemyTookDamage { get; private set; } = false;
+    private float enemyInvulnerabilityTime = 0.1f;
+
+
 
     public GameObject skullPrefab;
+
+    IEnumerator EnemyTookDamage(float enemyInvulnerability)
+    {
+        enemyTookDamage = true;
+        yield return new WaitForSeconds(enemyInvulnerability);
+        enemyTookDamage = false;
+    }
 
     private void Awake()
     {
@@ -37,10 +49,12 @@ public class Enemy_Properties : MonoBehaviour
         
         if (currentHealth <= 0)
         {
+            
             Die();
         }
 
         knockbackScript.Knockback(weaponTransform);
+        StartCoroutine(EnemyTookDamage(enemyInvulnerabilityTime));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -50,7 +64,9 @@ public class Enemy_Properties : MonoBehaviour
         if (collision.gameObject.GetComponent<Health>() != null)
         {
             playerHealth = collision.gameObject.GetComponent<Health>();
-            damagePlayer();
+            if (!playerHealth.playerTookDamage) damagePlayer();
+            else Debug.Log("Can't Take Damage");
+
         }
     }
 
@@ -62,7 +78,12 @@ public class Enemy_Properties : MonoBehaviour
 
         Stats_Manager.Instance.EnemyDefeated();
 
-        spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
+        RemoveFromList();
         Destroy(gameObject); //if health 0, dead
+    }
+
+    private void RemoveFromList()
+    {
+        spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
     }
 }

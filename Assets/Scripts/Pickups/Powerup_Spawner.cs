@@ -1,37 +1,32 @@
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-public class Enemy_Spawner : MonoBehaviour
+public class Powerup_Spawner : MonoBehaviour
 {
-    public GameObject enemy;
-    public GameObject enemiesFolder;
+
+    public GameObject powerupPrefab;
+    public GameObject powerupsFolder;
     public float spawnRate;
     public float maxSpawnRate = 7f;
     public float minSpawnRate = 5f;
     private float timer = 0;
-    private int maxSpawnAmount = 3;
+    private int maxSpawnAmount = 1;
 
     //Boundries on left and right walls for spawning enemies
     private float leftBound = -2.5f;
     private float rightBound = 4.5f;
 
-
     //Keeps track of all the spawns in a list
-    public List<GameObject> enemyList = new List<GameObject>();
+    public List<GameObject> powerupList = new List<GameObject>();
 
-
-    void Start()
+    private void Start()
     {
         spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
-        SpawnEnemy();
+        SpawnPowerup();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-
         //Checks if enough time has passed between obstacle spawns
         if (timer < spawnRate)
         {
@@ -39,20 +34,19 @@ public class Enemy_Spawner : MonoBehaviour
         }
         else
         {
-            SpawnEnemy();
+            SpawnPowerup();
             //Debug.Log(spawnRate);
             timer = 0;
             spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
         }
     }
 
-    void SpawnEnemy()
+    private void SpawnPowerup()
     {
-        //Spawns an obstacle between the bounds of the left and right walls
-        if (enemyList.Count < maxSpawnAmount)
+        if (powerupList.Count < maxSpawnAmount)
         {
-            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
+            powerupList.Add(Instantiate(powerupPrefab, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, powerupsFolder.transform));
         }
-        
     }
+
 }

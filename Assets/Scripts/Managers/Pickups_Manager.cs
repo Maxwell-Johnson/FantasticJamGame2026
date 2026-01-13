@@ -18,6 +18,5 @@ public class Pickups_Manager : MonoBehaviour
     public void SpawnSkullPickup(Vector3 position, Quaternion rotation)
     {
         Instantiate(skullPickup, position, rotation);
-        Debug.Log("SPAWN");
     }
 }

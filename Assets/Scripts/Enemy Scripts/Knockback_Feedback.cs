@@ -15,7 +15,6 @@ public class Knockback_Feedback : MonoBehaviour
     }
     public void Knockback(Transform weaponTransform)
     {
-        Debug.Log("KNOCEKD");
         gameObject.GetComponent<Enemy_Movement>().takingKnockbackTrue();
         StartCoroutine(StunTimer());
         Vector2 direction = (transform.position - weaponTransform.position).normalized;

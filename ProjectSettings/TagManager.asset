@@ -12,6 +12,11 @@ TagManager:
   - Enemy Spawner 1
   - Hurtbox
   - Pickupbox
+  - Pickup 1
+  - Pickup 2
+  - Pickup 3
+  - Powerup Spawner 1
+  - Larger Attack Powerup
   layers:
   - Default
   - TransparentFX
@@ -63,6 +68,9 @@ TagManager:
     locked: 0
   - name: Pickups
     uniqueID: 2026064145
+    locked: 0
+  - name: Powerups
+    uniqueID: 2511913849
     locked: 0
   - name: Player
     uniqueID: 2490747497

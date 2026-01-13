@@ -28,7 +28,6 @@ public class Player_Controller : MonoBehaviour
     #region ATTACK
 
     [SerializeField] public GameObject attack;
-    private bool isAttacking = false;
     private float attackDuration = 0.2f;
     private float attackCooldown = 0.8f;
     private bool canAttack;
@@ -81,12 +80,10 @@ public class Player_Controller : MonoBehaviour
 
     IEnumerator Attack(float attackCooldown)
     {
-        isAttacking = true;
         canAttack = false;
         attack.SetActive(true);
         yield return new WaitForSeconds(attackDuration);
         attack.SetActive(false);
-        isAttacking = false;
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
