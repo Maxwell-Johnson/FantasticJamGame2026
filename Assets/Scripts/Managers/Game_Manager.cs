@@ -57,10 +57,11 @@ public class Game_Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (restartAction.WasPressedThisFrame())
+        if (restartAction.WasPressedThisFrame() && state != GameState.PlayerDead)
         {
+            Debug.Log(state);
             currentScene = SceneManager.GetActiveScene();
-            //Debug.Log("RESTART");
+            Debug.Log("RESTART");
             SceneManager.LoadScene(currentScene.name);
             UpdateGameState(GameState.GameReset);
             UpdateGameState(GameState.GameRunning);

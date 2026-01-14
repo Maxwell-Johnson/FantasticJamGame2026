@@ -57,7 +57,15 @@ public class Player_Leaderboard : MonoBehaviour
             int checkIfLeaderboardLessThanAmountOfEntries = (msg.Length < names.Count) ? msg.Length : names.Count;
             for (int i = 0; i < checkIfLeaderboardLessThanAmountOfEntries; ++i)
             {
-                names[i].text = msg[i].Username;
+                // Strip hidden suffix if it exists
+                string displayName = msg[i].Username;
+
+                int suffixIndex = displayName.LastIndexOf('_');
+                if (suffixIndex > 0 && displayName.Length - suffixIndex == 5) // underscore + 4 chars
+                {
+                    displayName = displayName.Substring(0, suffixIndex);
+                }
+                names[i].text = displayName;
                 scores[i].text = msg[i].Score.ToString();
             }
         }));
@@ -66,11 +74,19 @@ public class Player_Leaderboard : MonoBehaviour
     // uploads username(of up to 5 characters) and score to leaderboard
     public void setLeaderboardEntry(string username, int score)
     {
-        LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, username, score, ((msg) =>
+        // Ensure the displayed part is short (optional)
+        string displayName = username.Length > 5 ? username.Substring(0, 5) : username;
+
+        // Add a hidden suffix so the server treats it as a new player
+        string hiddenSuffix = "_" + System.Guid.NewGuid().ToString("N").Substring(0, 4);
+        string uploadName = displayName + hiddenSuffix;
+
+        LeaderboardCreator.UploadNewEntry(publicLeaderboardKey, uploadName, score, ((msg) =>
         {
-            username.Substring(0, 5);
+            Leaderboards.FantasticGameJamLeaderboard.ResetPlayer();
+            
             getLeaderboard();
-            Debug.Log("Successfully added " + username + "'s score (" + score + ") to Leaderboard!");
+            //Debug.Log("Successfully added " + username + "'s score (" + score + ") to Leaderboard!");
         }));
     }
 
