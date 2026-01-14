@@ -11,9 +11,6 @@ public class Obstacle_Spawn : MonoBehaviour
     public float minSpawnRate = 0.1f;
     private float timer = 0;
 
-    //Boundries on left and right walls for spawning obstacles
-    private float leftBound = -2.5f;
-    private float rightBound = 4.5f;
     void Start()
     {
         spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
@@ -41,6 +38,6 @@ public class Obstacle_Spawn : MonoBehaviour
     void spawnObstacle()
     {
         //Spawns an obstacle between the bounds of the left and right walls
-        Instantiate(obstacle, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);
+        Instantiate(obstacle, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);
     }
 }

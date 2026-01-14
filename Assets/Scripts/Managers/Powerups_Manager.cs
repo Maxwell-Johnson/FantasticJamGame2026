@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.UIElements;
 
 public class Powerups_Manager : MonoBehaviour
 {
@@ -8,96 +11,157 @@ public class Powerups_Manager : MonoBehaviour
     public static Powerups_Manager Instance;
 
     public string powerupOne { get; private set; } = "Larger Attack Powerup";
-    private float largerAttackDuration = 10f;
-    private float largerAttackScaleMultiplier = 5f;
-    private bool largerAttackPowerupIsActive;
+    private float largerAttackDuration = 5f;
+    public bool largerAttackIsActive { get; private set; }
+    private float largerAttackActiveTimer;
 
     public string powerupTwo { get; private set; } = "Pickup 2";
-    private float powerupTwoDuration = 10f;
+    private float increasedDamageDuration = 5f;
+    private bool increasedDamageIsActive;
+    private float increasedDamageActiveTimer;
+    private int increasedDamageMod = 2;
+    private int originalDamageMod;
 
     public string powerupThree { get; private set; } = "Pickup 3";
     private float powerupThreeDuration = 10f;
+    private bool powerupThreeIsActive;
+    private float powerupThreeActiveTimer;
 
-    private float powerupDuration;
 
-
-    public Transform playerWeapon;
-    private Vector3 originalScale;
-    
+    public GameObject playerWeaponRegular;
+    public GameObject playerWeaponLarger;
+    public Weapon playerWeaponRegularScript;
+    public Weapon playerWeaponLargerScript;
+    public SpriteRenderer playerWeaponRegularSpriteRend;
+    public SpriteRenderer playerWeaponLargerSpriteRend;
+    public Transform playerWeaponTransform;
+    private Color originalWeaponColor;
 
     private void Awake()
     {
         Instance = this;
     }
 
+    // In update, manager is constanely checking if any powerup active timer has a value over 0.
+    // If it does, that means its active and will begin subtracting delta time from it (counting down)
+    // Once it reaches at (or below) 0, it runs the revert function for that powerup.
+    private void Update()
+    {
+        if (largerAttackActiveTimer > 0f)
+        {
+            largerAttackActiveTimer -= Time.deltaTime;
 
-    IEnumerator activatePowerupEnumerator(string powerupTag)
+            if (largerAttackActiveTimer <= 0f)
+            {
+                Debug.Log("Poweup Has Ended!");
+                LargerAttackRevert();
+                largerAttackIsActive = false;
+                //end powerup
+            }
+        }
+
+        if (increasedDamageActiveTimer > 0f)
+        {
+
+            increasedDamageActiveTimer -= Time.deltaTime;
+
+            if (increasedDamageActiveTimer <= 0f)
+            {
+                Debug.Log("Poweup Has Ended!");
+                increasedDamageRevert();
+                increasedDamageIsActive = false;
+                //end powerup
+            }
+        }
+
+        if (powerupThreeActiveTimer > 0f)
+        {
+
+            powerupThreeActiveTimer -= Time.deltaTime;
+
+            if (powerupThreeActiveTimer <= 0f)
+            {
+                Debug.Log("Poweup Has Ended!");
+                PowerupRevertThree();
+                powerupThreeIsActive = false;
+                //end powerup
+            }
+        }
+    }
+    public void ActivatePowerup(string powerupTag)
     {
         Debug.Log(powerupTag);
         if (powerupTag == powerupOne)
         {
-            if (largerAttackPowerupIsActive)
-            {
-                // SET UP A CHECK SO THAT THE GAME DOESNT JUST MULTIPLY THE SCALES AGAIN AND KEEP MAKE IT BIGGER; MAKE IT ELONGATE POWERUP
-            }
-            else
-            {
-                powerupDuration = largerAttackDuration;
-                LargerAttackPowerup();
-                yield return new WaitForSeconds(powerupDuration);
-                LargerAttackRevert();
-            }
+           
+            largerAttackActiveTimer += largerAttackDuration;
             
+            if (!largerAttackIsActive)
+            {
+                Debug.Log("Activating Powerup!");
+                LargerAttackPowerup();
+                largerAttackIsActive = true;
+            }
         }
         else if (powerupTag == powerupTwo)
         {
-            powerupDuration = powerupTwoDuration;
-            PowerupEffectTwo();
-            yield return new WaitForSeconds(powerupDuration);
+            increasedDamageActiveTimer += increasedDamageDuration;
+
+            if (!increasedDamageIsActive)
+            {
+                Debug.Log("Activating Powerup!");
+                increasedDamageEffect();
+                increasedDamageIsActive = true;
+            }
+
         }
         else if (powerupTag == powerupThree)
         {
-            powerupDuration = powerupThreeDuration;
-            PowerupEffectThree();
-            yield return new WaitForSeconds(powerupDuration);
+            powerupThreeActiveTimer += powerupThreeDuration;
+
+            if (!powerupThreeIsActive)
+            {
+                Debug.Log("Activating Powerup!");
+                PowerupEffectThree();
+                powerupThreeIsActive = true;
+            }
 
         }
 
-    }
-
-    public void activatePowerup(string powerupTag)
-    {
-
-        StartCoroutine(activatePowerupEnumerator(powerupTag));
     }
 
 
     private void LargerAttackPowerup()
     {
-        Vector3 newScale = playerWeapon.localScale;
-        originalScale = playerWeapon.localScale;
-
-        newScale *= largerAttackScaleMultiplier;
-
-        playerWeapon.localScale = newScale;
-
+        // Any additional effects of powerup if needed
     }
 
     private void LargerAttackRevert()
     {
-        playerWeapon.localScale = originalScale;
+        // Any additional effects of powerup if needed
     }
 
 
 
-    private void PowerupEffectTwo()
+    private void increasedDamageEffect()
     {
+        originalWeaponColor = playerWeaponRegularSpriteRend.color;
+        originalDamageMod = playerWeaponRegularScript.damage;
 
+        playerWeaponRegularSpriteRend.color = Color.red;
+        playerWeaponRegularScript.damage = increasedDamageMod;
+
+        playerWeaponLargerSpriteRend.color = Color.red;
+        playerWeaponLargerScript.damage = increasedDamageMod;
     }
 
-    private void PowerupRevertTwo()
+    private void increasedDamageRevert()
     {
+        playerWeaponRegularSpriteRend.color = originalWeaponColor;
+        playerWeaponRegularScript.damage = originalDamageMod;
 
+        playerWeaponLargerSpriteRend.color = originalWeaponColor;
+        playerWeaponLargerScript.damage = originalDamageMod;
     }
 
 

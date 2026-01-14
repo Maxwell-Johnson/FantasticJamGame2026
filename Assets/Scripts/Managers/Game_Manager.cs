@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using static Stats_Manager;
 
@@ -10,6 +11,11 @@ public class Game_Manager : MonoBehaviour
     public static Game_Manager Instance;
 
     public GameState state;
+
+    private int framerate = 60;
+
+    public float leftSpawnerBound { get; private set; } = -4f;
+    public float rightSpawnerBound { get; private set; } = 6f;
 
     //An event allows other scripts to subscribe to it and activate a function whenever the value is changed
     public static event Action<GameState> OnGameStateChanged;
@@ -31,8 +37,10 @@ public class Game_Manager : MonoBehaviour
             case GameState.GamePaused:
                 break;
             case GameState.PlayerDead:
+                Time.timeScale = 0;
                 break;
             case GameState.GameReset:
+                Time.timeScale = 1;
                 break;
         }
 
@@ -52,6 +60,8 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         restartAction = InputSystem.actions.FindAction("Restart");
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = framerate;
     }
 
     // Update is called once per frame

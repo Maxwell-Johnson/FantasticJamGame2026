@@ -13,10 +13,6 @@ public class Enemy_Spawner : MonoBehaviour
     private float timer = 0;
     private int maxSpawnAmount = 3;
 
-    //Boundries on left and right walls for spawning enemies
-    private float leftBound = -2.5f;
-    private float rightBound = 4.5f;
-
 
     //Keeps track of all the spawns in a list
     public List<GameObject> enemyList = new List<GameObject>();
@@ -51,7 +47,7 @@ public class Enemy_Spawner : MonoBehaviour
         //Spawns an obstacle between the bounds of the left and right walls
         if (enemyList.Count < maxSpawnAmount)
         {
-            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
+            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
         }
         
     }

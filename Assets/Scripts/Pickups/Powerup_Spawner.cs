@@ -12,9 +12,6 @@ public class Powerup_Spawner : MonoBehaviour
     private float timer = 0;
     private int maxSpawnAmount = 1;
 
-    //Boundries on left and right walls for spawning enemies
-    private float leftBound = -2.5f;
-    private float rightBound = 4.5f;
 
     //Keeps track of all the spawns in a list
     public List<GameObject> powerupList = new List<GameObject>();
@@ -45,7 +42,7 @@ public class Powerup_Spawner : MonoBehaviour
     {
         if (powerupList.Count < maxSpawnAmount)
         {
-            powerupList.Add(Instantiate(powerupPrefab, new Vector3(Random.Range(leftBound, rightBound), transform.position.y, transform.position.z), transform.rotation, powerupsFolder.transform));
+            powerupList.Add(Instantiate(powerupPrefab, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, powerupsFolder.transform));
         }
     }
 

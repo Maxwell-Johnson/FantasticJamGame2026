@@ -39,7 +39,7 @@ public class Powerup_Pickup : MonoBehaviour
         if (collision.CompareTag("Pickupbox"))
         {
 
-            Powerups_Manager.Instance.activatePowerup(gameObject.tag);
+            Powerups_Manager.Instance.ActivatePowerup(gameObject.tag);
             DeletePowerup();
         }
     }
