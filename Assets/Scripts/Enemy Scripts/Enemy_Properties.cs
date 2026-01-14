@@ -15,7 +15,7 @@ public class Enemy_Properties : MonoBehaviour
     private GameObject spawner;
 
     public bool enemyTookDamage { get; private set; } = false;
-    private float enemyInvulnerabilityTime = 0.1f;
+    private float enemyInvulnerabilityTime = 0.5f;
 
 
 

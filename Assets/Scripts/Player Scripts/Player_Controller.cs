@@ -28,6 +28,7 @@ public class Player_Controller : MonoBehaviour
     #region ATTACK
 
     [SerializeField] public GameObject attack;
+    [SerializeField] public GameObject largerAttack;
     private float attackDuration = 0.2f;
     private float attackCooldown = 0.8f;
     private bool canAttack;
@@ -81,11 +82,23 @@ public class Player_Controller : MonoBehaviour
     IEnumerator Attack(float attackCooldown)
     {
         canAttack = false;
-        attack.SetActive(true);
-        yield return new WaitForSeconds(attackDuration);
-        attack.SetActive(false);
+        if (Powerups_Manager.Instance.largerAttackIsActive)
+        {
+            largerAttack.SetActive(true);
+            yield return new WaitForSeconds(attackDuration);
+            largerAttack.SetActive(false);
+        }
+        else
+        {
+            attack.SetActive(true);
+            yield return new WaitForSeconds(attackDuration);
+            attack.SetActive(false);
+        }
+        
         yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
+
+
 
 }

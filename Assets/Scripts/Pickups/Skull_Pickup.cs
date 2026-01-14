@@ -6,7 +6,7 @@ public class Skull_Pickup : MonoBehaviour
 
     private int pickupValue = 1;
     private Rigidbody2D rb;
-    private float fallSpeed = -1f;
+    private float fallSpeed = -3f;
     private float deadzone = -14f;
 
     private void Awake()
