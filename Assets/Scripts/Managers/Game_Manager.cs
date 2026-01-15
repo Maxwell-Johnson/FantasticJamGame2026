@@ -22,6 +22,7 @@ public class Game_Manager : MonoBehaviour
 
     //Grabs the functionality from Input manager to read if someone presses the reset button
     InputAction restartAction;
+    InputAction pauseAction;
 
     private Scene currentScene;
 
@@ -35,6 +36,11 @@ public class Game_Manager : MonoBehaviour
             case GameState.GameRunning:
                 break;
             case GameState.GamePaused:
+                Time.timeScale = 0;
+                break;
+            case GameState.GameResumed:
+                Time.timeScale = 1;
+                UpdateGameState(GameState.GameRunning);
                 break;
             case GameState.PlayerDead:
                 Time.timeScale = 0;
@@ -60,6 +66,7 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         restartAction = InputSystem.actions.FindAction("Restart");
+        pauseAction = InputSystem.actions.FindAction("Pause");
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = framerate;
     }
@@ -77,6 +84,18 @@ public class Game_Manager : MonoBehaviour
             UpdateGameState(GameState.GameRunning);
 
         }
+
+        if (pauseAction.WasPressedThisFrame())
+        {
+            if (state == GameState.GameRunning)
+            {
+                UpdateGameState(GameState.GamePaused);
+            }
+            else if (state == GameState.GamePaused)
+            {
+                UpdateGameState(GameState.GameResumed);
+            }
+        }
     }
 }
 
@@ -84,6 +103,7 @@ public enum GameState
 {
     GameRunning,
     GamePaused,
+    GameResumed,
     PlayerDead,
     GameReset
 
