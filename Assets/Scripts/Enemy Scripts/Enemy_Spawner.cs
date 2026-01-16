@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Enemy_Spawner : MonoBehaviour
 {
+    public bool meleeSpawner;
+    public bool rangedSpawner;
     public GameObject enemy;
     public GameObject enemiesFolder;
     public float spawnRate;
@@ -47,7 +49,18 @@ public class Enemy_Spawner : MonoBehaviour
         //Spawns an obstacle between the bounds of the left and right walls
         if (enemyList.Count < maxSpawnAmount)
         {
-            enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
+            if (meleeSpawner && !rangedSpawner)
+            {
+                enemyList.Add(Instantiate(enemy, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, enemiesFolder.transform));
+            }
+            else if (rangedSpawner && !meleeSpawner)
+            {
+                //ranged enemy spawn
+            }
+            else
+            {
+                Debug.Log("Error: enemy spawner type not selected or multiple types selected.");
+            }
         }
         
     }
