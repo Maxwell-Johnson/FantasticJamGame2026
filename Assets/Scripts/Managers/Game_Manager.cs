@@ -80,6 +80,7 @@ public class Game_Manager : MonoBehaviour
     }
 }
 
+
 public enum GameState
 {
     GameRunning,
