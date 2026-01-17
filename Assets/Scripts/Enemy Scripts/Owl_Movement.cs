@@ -16,6 +16,7 @@ public class Owl_Movement : MonoBehaviour
     private Vector2 endPointReference;
     private Vector2 startPointReference;
     private Vector2 velocity = Vector2.zero;
+    private bool owlIsInitialized = false;
 
     private void Start()
     {
@@ -30,27 +31,32 @@ public class Owl_Movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 target;
 
-        if (direction == 1)
+        if (owlIsInitialized)
         {
-            target = startPointReference;
-        }
-        else
-        {
-            target = endPointReference;
-        }
+            Vector2 target;
 
-        //owlTransform.position = Vector2.SmoothDamp(owlTransform.position, target, ref velocity, speed);
-        owlTransform.position = Vector2.MoveTowards(owlTransform.position, target, speed * Time.deltaTime);
+            if (direction == 1)
+            {
+                target = startPointReference;
+            }
+            else
+            {
+                target = endPointReference;
+            }
 
-        float distance = (target - (Vector2)owlTransform.position).magnitude;
+            //owlTransform.position = Vector2.SmoothDamp(owlTransform.position, target, ref velocity, speed);
+            owlTransform.position = Vector2.MoveTowards(owlTransform.position, target, speed * Time.deltaTime);
 
-        if (distance <= 0.1f)
-        {
-            
-            direction *= -1;
+            float distance = (target - (Vector2)owlTransform.position).magnitude;
+
+            if (distance <= 0.1f)
+            {
+
+                direction *= -1;
+            }
         }
+        
     }
 
     Vector2 currentMovementTarget()
@@ -63,5 +69,16 @@ public class Owl_Movement : MonoBehaviour
         {
             return endPoint.position;
         }
+    }
+
+    void InitializeOwlStrafe()
+    {
+        Transform endReference = owlTransform;
+        endPoint.position = endReference.position + new Vector3(2, 0, 0);
+        Transform startReference = owlTransform;
+        startPoint.position = startReference.position + new Vector3(-2, 0, 0);
+        startPointReference = new Vector2(startPoint.position.x, startPoint.position.y);
+        endPointReference = new Vector2(endPoint.position.x, endPoint.position.y);
+        owlIsInistialized = true;
     }
 }
