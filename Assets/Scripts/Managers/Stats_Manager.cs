@@ -13,7 +13,7 @@ public class Stats_Manager : MonoBehaviour
     //These variables keep track of the various stats across the game
     public int skullsCollected { get; private set; }
     public int enemiesDefeated { get; private set; }
-    public int distanceTravelled { get; private set; }
+    public float distancesTravelled { get; private set; }
 
     private void Awake()
     {
@@ -44,7 +44,7 @@ public class Stats_Manager : MonoBehaviour
         {
             skullsCollected = 0;
             enemiesDefeated = 0;
-            distanceTravelled = 0;
+            distancesTravelled = 0f;
         }
     }
 
@@ -62,5 +62,15 @@ public class Stats_Manager : MonoBehaviour
     public void GrabCurrentScore(int currentScore)
     {
         currentScore = skullsCollected;
+    }
+
+    public void DistanceTravelled(float distanceTravelled_)
+    {
+        distancesTravelled += distanceTravelled_;
+    }
+
+    public float GrabCurrentDistanceTravelled ()
+    {
+         return distancesTravelled;
     }
 }

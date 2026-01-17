@@ -10,7 +10,6 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; } //allows other scripts to GET this value, but only this script can SET this value
 
 
-
     IEnumerator PlayerInvulnerable(float invulnerabilityTime)
     {
         playerTookDamage = true;
