@@ -19,6 +19,11 @@ TagManager:
   - Larger Attack Powerup
   - Melee Enemy
   - Ranged Enemy
+  - Owl Stop Point 1
+  - Owl Stop Point 2
+  - Owl Stop Point 3
+  - Owl Stop Point 4
+  - Owl Stop Point 5
   layers:
   - Default
   - TransparentFX
@@ -30,7 +35,7 @@ TagManager:
   - Obstacles
   - Pickups
   - Enemies
-  - 
+  - Walls
   - 
   - 
   - 
@@ -79,6 +84,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2490747497
+    locked: 0
+  - name: Flying Enemies
+    uniqueID: 1866217471
     locked: 0
   - name: DEV LAYER
     uniqueID: 4234555421
