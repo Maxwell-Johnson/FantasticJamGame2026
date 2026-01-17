@@ -1,14 +1,18 @@
 using System.Collections;
+using TMPro;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Enemy_Properties : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Knockback_Feedback knockbackScript;
-    [SerializeField] public float maxHealth = 2f;
+    [SerializeField] public float meleeMaxHealth = 2f;
+    [SerializeField] public float rangedMaxHealth = 1f;
     private float currentHealth;
 
     private Health playerHealth;
+
 
     private float attackDamage = 1f;
 
@@ -36,11 +40,20 @@ public class Enemy_Properties : MonoBehaviour
     }
     void Start()
     {
-        currentHealth = maxHealth; //Sets current health to established max health
+        if (gameObject.CompareTag("Melee Enemy"))
+        {
+            currentHealth = meleeMaxHealth; //Sets current health to established max health
+        }
+        else if (gameObject.CompareTag("Ranged Enemy"))
+        {
+            currentHealth = rangedMaxHealth; //Sets current health to established max health
+        }
     }
 
     private void damagePlayer()
     {
+
+
         playerHealth.TakeDamage(attackDamage);
     }
     public void TakeDamage(float damage, Transform weaponTransform)

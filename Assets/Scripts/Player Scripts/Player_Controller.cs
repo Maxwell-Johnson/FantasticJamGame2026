@@ -17,8 +17,8 @@ public class Player_Controller : MonoBehaviour
 
     #region MOVEMENT
 
-    private float moveSpeedX = 4f;
-    private float moveSpeedY = 6f;
+    public float moveSpeedX = 4f;
+    public float moveSpeedY = 6f;
     private Vector2 moveInput;
 
     private float playerPushSpeed;

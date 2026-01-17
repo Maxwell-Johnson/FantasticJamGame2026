@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UIElements;
 
@@ -23,15 +24,18 @@ public class Powerups_Manager : MonoBehaviour
     private int originalDamageMod;
 
     public string powerupThree { get; private set; } = "Pickup 3";
-    private float powerupThreeDuration = 10f;
-    private bool powerupThreeIsActive;
-    private float powerupThreeActiveTimer;
-
+    private float speedUpDuration = 10f;
+    private bool speedUpIsActive;
+    private float speedUpActiveTimer;
+    private float speedUpMultiplier = 2f;
+    private float originalSpeedX;
+    private float originalSpeedY;
 
     public GameObject playerWeaponRegular;
     public GameObject playerWeaponLarger;
     public Weapon playerWeaponRegularScript;
     public Weapon playerWeaponLargerScript;
+    public Player_Controller playerController;
     public SpriteRenderer playerWeaponRegularSpriteRend;
     public SpriteRenderer playerWeaponLargerSpriteRend;
     public Transform playerWeaponTransform;
@@ -74,16 +78,16 @@ public class Powerups_Manager : MonoBehaviour
             }
         }
 
-        if (powerupThreeActiveTimer > 0f)
+        if (speedUpActiveTimer > 0f)
         {
 
-            powerupThreeActiveTimer -= Time.deltaTime;
+            speedUpActiveTimer -= Time.deltaTime;
 
-            if (powerupThreeActiveTimer <= 0f)
+            if (speedUpActiveTimer <= 0f)
             {
                 Debug.Log("Poweup Has Ended!");
-                PowerupRevertThree();
-                powerupThreeIsActive = false;
+                speedUpRevert();
+                speedUpIsActive = false;
                 //end powerup
             }
         }
@@ -117,13 +121,13 @@ public class Powerups_Manager : MonoBehaviour
         }
         else if (powerupTag == powerupThree)
         {
-            powerupThreeActiveTimer += powerupThreeDuration;
+            speedUpActiveTimer += speedUpDuration;
 
-            if (!powerupThreeIsActive)
+            if (!speedUpIsActive)
             {
                 Debug.Log("Activating Powerup!");
-                PowerupEffectThree();
-                powerupThreeIsActive = true;
+                speedUpEffect();
+                speedUpIsActive = true;
             }
 
         }
@@ -166,13 +170,15 @@ public class Powerups_Manager : MonoBehaviour
 
 
 
-    private void PowerupEffectThree()
+    private void speedUpEffect()
     {
-        
+        playerController.moveSpeedY *= speedUpMultiplier;
+        playerController.moveSpeedX *= speedUpMultiplier;
     }
-    private void PowerupRevertThree()
+    private void speedUpRevert()
     {
-
+        playerController.moveSpeedY /= speedUpMultiplier;
+        playerController.moveSpeedX /= speedUpMultiplier;
     }
 
 
