@@ -43,7 +43,15 @@ public class Powerups_Manager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
     // In update, manager is constanely checking if any powerup active timer has a value over 0.

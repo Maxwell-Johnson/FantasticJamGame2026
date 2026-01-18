@@ -32,7 +32,7 @@ public class Enemy_Movement : MonoBehaviour
             moveDirection = direction;
 
             /*  
-            Use if you want the enemy to rotate in the direction of the player
+            Use if you want the meleeEnemy to rotate in the direction of the player
 
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             rb.rotation = angle;

@@ -24,6 +24,9 @@ TagManager:
   - Owl Stop Point 3
   - Owl Stop Point 4
   - Owl Stop Point 5
+  - Ranged Spawner
+  - Soul Enemy Spawner
+  - Soul Enemy
   layers:
   - Default
   - TransparentFX
@@ -31,12 +34,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Player
   - Obstacles
   - Pickups
   - Enemies
   - Walls
-  - 
+  - Soul Enemies
   - 
   - 
   - 
@@ -81,6 +84,9 @@ TagManager:
     locked: 0
   - name: Powerups
     uniqueID: 2511913849
+    locked: 0
+  - name: Boat
+    uniqueID: 1978360197
     locked: 0
   - name: Player
     uniqueID: 2490747497

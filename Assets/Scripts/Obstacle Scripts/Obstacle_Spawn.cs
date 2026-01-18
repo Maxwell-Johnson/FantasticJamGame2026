@@ -38,6 +38,6 @@ public class Obstacle_Spawn : MonoBehaviour
     void spawnObstacle()
     {
         //Spawns an obstacle between the bounds of the left and right walls
-        Instantiate(obstacle, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);
+        Instantiate(obstacle, new Vector3(Random.Range(Game_Manager.Instance.meleeLeftSpawnerBound, Game_Manager.Instance.meleeRightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);
     }
 }

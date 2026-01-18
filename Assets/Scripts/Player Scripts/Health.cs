@@ -24,6 +24,7 @@ public class Health : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
+
         
         if (currentHealth > 0)
         {
@@ -32,11 +33,11 @@ public class Health : MonoBehaviour
             {
                 
                 Game_Manager.Instance.UpdateGameState(GameState.PlayerDead);
-                Debug.Log("I DEAD");
                 Destroy(gameObject);
             }
         }
         StartCoroutine(PlayerInvulnerable(invulnerabilityTime));
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

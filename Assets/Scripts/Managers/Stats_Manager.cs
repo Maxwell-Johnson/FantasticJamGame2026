@@ -17,7 +17,15 @@ public class Stats_Manager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
 
         //Subscribes to State Change function in Game Manager with the Reset Stats function; runs if state changes
         Game_Manager.OnGameStateChanged += ResetStats;

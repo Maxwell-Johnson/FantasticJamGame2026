@@ -7,9 +7,13 @@ public class Enemy_Properties : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Knockback_Feedback knockbackScript;
-    [SerializeField] public float meleeMaxHealth = 2f;
-    [SerializeField] public float rangedMaxHealth = 1f;
+    [SerializeField] public float meleeMaxHealth;
+    [SerializeField] public float rangedMaxHealth;
+    [SerializeField] public float soulMaxHealth;
     private float currentHealth;
+    public bool rangedEnemy;
+    public bool meleeEnemy;
+    public bool soulEnemy;
 
     private Health playerHealth;
 
@@ -34,7 +38,20 @@ public class Enemy_Properties : MonoBehaviour
 
     private void Awake()
     {
-        spawner = GameObject.FindGameObjectWithTag("Enemy Spawner 1");
+        if (rangedEnemy)
+        {
+
+            spawner = GameObject.FindGameObjectWithTag("Ranged Spawner");
+        }
+        else if (meleeEnemy)
+        {
+            spawner = GameObject.FindGameObjectWithTag("Enemy Spawner 1");
+        }
+        else if (soulEnemy)
+        {
+            spawner = GameObject.FindGameObjectWithTag("Soul Enemy Spawner");
+        }
+
         rb = GetComponent<Rigidbody2D>();
         knockbackScript = GetComponent<Knockback_Feedback>();
     }
@@ -47,6 +64,10 @@ public class Enemy_Properties : MonoBehaviour
         else if (gameObject.CompareTag("Ranged Enemy"))
         {
             currentHealth = rangedMaxHealth; //Sets current health to established max health
+        }
+        else if (gameObject.CompareTag("Soul Enemy"))
+        {
+            currentHealth = soulMaxHealth; //Sets current health to established max health
         }
     }
 
@@ -66,7 +87,11 @@ public class Enemy_Properties : MonoBehaviour
             Die();
         }
 
-        knockbackScript.Knockback(weaponTransform);
+        if (knockbackScript != null)
+        {
+            knockbackScript.Knockback(weaponTransform);
+        }
+        
         StartCoroutine(EnemyTookDamage(enemyInvulnerabilityTime));
     }
 
@@ -78,12 +103,11 @@ public class Enemy_Properties : MonoBehaviour
         {
             playerHealth = collision.gameObject.GetComponent<Health>();
             if (!playerHealth.playerTookDamage) damagePlayer();
-            else Debug.Log("Can't Take Damage");
 
         }
     }
 
-    private void Die()
+    public void Die()
     {
         Vector3 deathPosition = gameObject.transform.position;
         Quaternion deathQuaternion = gameObject.transform.rotation;
@@ -97,6 +121,18 @@ public class Enemy_Properties : MonoBehaviour
 
     private void RemoveFromList()
     {
-        spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
+        if (meleeEnemy)
+        {
+            spawner.GetComponent<Enemy_Spawner>().enemyList.Remove(gameObject);
+        }
+        else if (rangedEnemy)
+        {
+            spawner.GetComponent<Enemy_Spawner>().rangeList.Remove(gameObject);
+        }
+        else if (soulEnemy)
+        {
+            spawner.GetComponent<Enemy_Spawner>().soulList.Remove(gameObject);
+        }
+
     }
 }

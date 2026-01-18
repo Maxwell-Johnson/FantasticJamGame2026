@@ -14,8 +14,16 @@ public class Game_Manager : MonoBehaviour
 
     private int framerate = 60;
 
-    public float leftSpawnerBound { get; private set; } = -4f;
-    public float rightSpawnerBound { get; private set; } = 6f;
+    public float meleeLeftSpawnerBound { get; private set; } = -4f;
+    public float meleeRightSpawnerBound { get; private set; } = 6f;
+
+    public float rangedTopLeftSpawnerBound { get; private set; } = -7f;
+    public float rangedTopRightSpawnerBound { get; private set; } = 9.5f;
+    public float rangedTopYValue { get; private set; } = 9.5f;
+    public float rangedSideTopSpawnerBound { get; private set; } = 11f;
+    public float rangedSideBottomSpawnerBound { get; private set; } = 0f;
+    public float rangedLeftSpawnerXValue { get; private set; } = 9.5f;
+    public float rangedRightSpawnerXValue { get; private set; } = -7f;
 
     //An event allows other scripts to subscribe to it and activate a function whenever the value is changed
     public static event Action<GameState> OnGameStateChanged;
@@ -29,6 +37,7 @@ public class Game_Manager : MonoBehaviour
     public void UpdateGameState(GameState newState)
     {
         state = newState;
+        Debug.Log(newState);
 
         //Each of these cases will run depending on the gamestate
         switch (newState)
@@ -46,9 +55,8 @@ public class Game_Manager : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameState.GameReset:
-                Time.timeScale = 1;
                 break;
-        }
+        }//
 
         OnGameStateChanged?.Invoke(newState);
 
@@ -56,7 +64,15 @@ public class Game_Manager : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
 

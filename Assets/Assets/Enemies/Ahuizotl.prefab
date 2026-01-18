@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 5861793829158065289}
   m_Layer: 9
   m_Name: Ahuizotl
-  m_TagString: Untagged
+  m_TagString: Melee Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52,6 +52,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Enemy_Properties
   meleeMaxHealth: 2
   rangedMaxHealth: 1
+  rangedEnemy: 0
+  meleeEnemy: 1
   skullPrefab: {fileID: 6161762791700294281, guid: 8e62c9d8e3bd4f747a395b26d7123dcf, type: 3}
 --- !u!114 &8301078633321580319
 MonoBehaviour:

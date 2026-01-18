@@ -19,7 +19,7 @@ public class Owl_Movement : MonoBehaviour
     private Vector2 startPointReference;
     private Vector2 velocity = Vector2.zero;
     private bool owlIsInitialized = false;
-    private bool owlInPosition = false;
+    public bool owlInPosition { get; private set; } = false;
     private int stopPointNumber;
     private bool owlMovingToSpot;
     private bool owlFindingParking;

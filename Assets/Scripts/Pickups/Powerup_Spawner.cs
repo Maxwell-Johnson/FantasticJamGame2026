@@ -42,7 +42,7 @@ public class Powerup_Spawner : MonoBehaviour
     {
         if (powerupList.Count < maxSpawnAmount)
         {
-            powerupList.Add(Instantiate(powerupPrefab, new Vector3(Random.Range(Game_Manager.Instance.leftSpawnerBound, Game_Manager.Instance.rightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, powerupsFolder.transform));
+            powerupList.Add(Instantiate(powerupPrefab, new Vector3(Random.Range(Game_Manager.Instance.meleeLeftSpawnerBound, Game_Manager.Instance.meleeRightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, powerupsFolder.transform));
         }
     }
 

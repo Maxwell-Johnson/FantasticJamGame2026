@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,7 +10,7 @@ public class Player_Controller : MonoBehaviour
 
     #region COMPONENTS
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb { get; private set; }
     InputAction moveAction;
     InputAction attackAction;
 
@@ -19,7 +20,7 @@ public class Player_Controller : MonoBehaviour
 
     public float moveSpeedX = 4f;
     public float moveSpeedY = 6f;
-    private Vector2 moveInput;
+    public Vector2 moveInput { get; private set; }
 
     private float playerPushSpeed;
 
@@ -58,6 +59,7 @@ public class Player_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
 
         if (moveInput.y < 0)
         {

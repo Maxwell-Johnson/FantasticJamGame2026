@@ -17,14 +17,16 @@ public class Powerup_Pickup : MonoBehaviour
     private float fallSpeedMin = -1f;
 
     private GameObject spawner;
+    private SpriteRenderer spriteRend;
 
-    private int pickupNumber;
+    private int powerupNumber;
     private float powerupDuration;
     private bool powerupActive;
 
     private void Awake()
     {
         spawner = GameObject.FindGameObjectWithTag("Powerup Spawner 1");
+        spriteRend = gameObject.GetComponent<SpriteRenderer>();
 
         rb = gameObject.GetComponent<Rigidbody2D>();
 
@@ -72,20 +74,26 @@ public class Powerup_Pickup : MonoBehaviour
 
 
         // Sets pickup to be one of 3 random pickups using tags
-        pickupNumber = Random.Range(1, 4);
-        if (pickupNumber == 1)
+        powerupNumber = Random.Range(1, 4);
+        if (powerupNumber == 1)
         {
+            
             gameObject.tag = Powerups_Manager.Instance.powerupOne;
+            
         }
-        else if (pickupNumber == 2)
+        else if (powerupNumber == 2)
         {
             gameObject.tag = Powerups_Manager.Instance.powerupTwo;
         }
-        else if (pickupNumber == 3)
+        else if (powerupNumber == 3)
         {
             gameObject.tag = Powerups_Manager.Instance.powerupThree;
 
         }
+
+        Sprite spriteGrabbed = spawner.GetComponentInChildren<Sprite_Handler_Powerups>().GrabSprite(powerupNumber);
+
+        spriteRend.sprite = spriteGrabbed;
 
     }
 }

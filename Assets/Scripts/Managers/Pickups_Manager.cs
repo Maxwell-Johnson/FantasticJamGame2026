@@ -11,7 +11,15 @@ public class Pickups_Manager : MonoBehaviour
 
     void Start()
     {
-        Instance = this;
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
     }
 
 
