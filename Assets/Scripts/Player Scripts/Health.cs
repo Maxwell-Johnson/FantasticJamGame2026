@@ -28,13 +28,19 @@ public class Health : MonoBehaviour
         
         if (currentHealth > 0)
         {
+
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth); //Clamp makes sure this value is never allowed to go below 0 when subtracing
             if (currentHealth == 0)
             {
-                
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.playerDeath);
                 Game_Manager.Instance.UpdateGameState(GameState.PlayerDead);
                 Destroy(gameObject);
             }
+            else
+            {
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.playerHit);
+            }
+            
         }
         StartCoroutine(PlayerInvulnerable(invulnerabilityTime));
         

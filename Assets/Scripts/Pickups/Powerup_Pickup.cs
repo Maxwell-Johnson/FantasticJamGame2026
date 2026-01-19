@@ -40,7 +40,7 @@ public class Powerup_Pickup : MonoBehaviour
         
         if (collision.CompareTag("Pickupbox"))
         {
-
+            Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.powerUpCollect);
             Powerups_Manager.Instance.ActivatePowerup(gameObject.tag);
             DeletePowerup();
         }

@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
-using Unity.VisualScripting;
+
 using UnityEngine;
-using UnityEngine.Assertions.Must;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UIElements;
+
 
 public class Powerups_Manager : MonoBehaviour
 {
@@ -69,6 +65,7 @@ public class Powerups_Manager : MonoBehaviour
                 LargerAttackRevert();
                 largerAttackIsActive = false;
                 //end powerup
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.powerupEnd);
             }
         }
 
@@ -83,6 +80,7 @@ public class Powerups_Manager : MonoBehaviour
                 increasedDamageRevert();
                 increasedDamageIsActive = false;
                 //end powerup
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.powerupEnd);
             }
         }
 
@@ -97,6 +95,7 @@ public class Powerups_Manager : MonoBehaviour
                 speedUpRevert();
                 speedUpIsActive = false;
                 //end powerup
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.powerupEnd);
             }
         }
     }

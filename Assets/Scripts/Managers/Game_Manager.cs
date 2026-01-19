@@ -1,9 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
-using static Stats_Manager;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -38,7 +36,7 @@ public class Game_Manager : MonoBehaviour
     {
         state = newState;
         Debug.Log(newState);
-
+        Resources.UnloadUnusedAssets();
         //Each of these cases will run depending on the gamestate
         switch (newState)
         {
@@ -73,6 +71,8 @@ public class Game_Manager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        Resources.UnloadUnusedAssets();
     }
 
 

@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Obstacle_Spawn : MonoBehaviour
 {
-    public GameObject obstacle;
+    public List<GameObject> obstaclePrefabs = new List<GameObject>();
     public GameObject obstaclesFolder;
+    private int obstacleToSpawn;
 
     public float spawnRate = 1;
     public float maxSpawnRate = 3f;
@@ -14,7 +16,12 @@ public class Obstacle_Spawn : MonoBehaviour
     void Start()
     {
         spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
-        spawnObstacle();
+        obstacleToSpawn = Random.Range(0, obstaclePrefabs.Count);
+        if (obstaclePrefabs[obstacleToSpawn] != null)
+        {
+            spawnObstacle(obstaclePrefabs[obstacleToSpawn]);
+        }
+        
     }
 
     // Update is called once per frame
@@ -28,14 +35,18 @@ public class Obstacle_Spawn : MonoBehaviour
         }
         else
         {
-            spawnObstacle();
+            obstacleToSpawn = Random.Range(0, obstaclePrefabs.Count);
+            if (obstaclePrefabs[obstacleToSpawn] != null)
+            {
+                spawnObstacle(obstaclePrefabs[obstacleToSpawn]);
+            }
             //Debug.Log(spawnRate);
             timer = 0;
             spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
         }
     }
 
-    void spawnObstacle()
+    void spawnObstacle(GameObject obstacle)
     {
         //Spawns an obstacle between the bounds of the left and right walls
         Instantiate(obstacle, new Vector3(Random.Range(Game_Manager.Instance.meleeLeftSpawnerBound, Game_Manager.Instance.meleeRightSpawnerBound), transform.position.y, transform.position.z), transform.rotation, obstaclesFolder.transform);

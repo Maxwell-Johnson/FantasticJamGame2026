@@ -27,6 +27,7 @@ TagManager:
   - Ranged Spawner
   - Soul Enemy Spawner
   - Soul Enemy
+  - Wolf Attack Collider
   layers:
   - Default
   - TransparentFX

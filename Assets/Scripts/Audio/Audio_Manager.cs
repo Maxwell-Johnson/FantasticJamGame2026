@@ -1,4 +1,4 @@
-using TMPro;
+
 using UnityEngine;
 
 public class Audio_Manager : MonoBehaviour
@@ -19,6 +19,16 @@ public class Audio_Manager : MonoBehaviour
     [SerializeField] public AudioClip wolfDeath;
     [SerializeField] public AudioClip playerDeath;
     [SerializeField] public AudioClip powerUpCollect;
+    [SerializeField] public AudioClip wolfAttack;
+    [SerializeField] public AudioClip playerHit;
+    [SerializeField] public AudioClip owlFlap;
+    [SerializeField] public AudioClip powerupEnd;
+    [SerializeField] public AudioClip swingWeapon;
+    [SerializeField] public AudioClip wolfSwim;
+    [SerializeField] public AudioClip spiritAttack;
+    [SerializeField] public AudioClip flowingWater;
+    [SerializeField] public AudioClip owlDeath;
+    [SerializeField] public AudioClip playerHitEnemy;
 
     private void Awake()
     {
@@ -33,6 +43,11 @@ public class Audio_Manager : MonoBehaviour
         }
 
         Game_Manager.OnGameStateChanged += ConfigureMusic;
+    }
+
+    private void OnDisable()
+    {
+        Game_Manager.OnGameStateChanged -= ConfigureMusic;
     }
 
     private void Start()

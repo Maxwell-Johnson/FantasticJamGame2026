@@ -1,7 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Concurrent;
 
 public class Main_Menu_Controller : MonoBehaviour
 {

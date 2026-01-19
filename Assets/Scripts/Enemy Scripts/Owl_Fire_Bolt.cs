@@ -1,5 +1,4 @@
-using System.Xml.Xsl;
-using UnityEditor.Experimental.GraphView;
+
 using UnityEngine;
 
 public class Owl_Fire_Bolt : MonoBehaviour
@@ -8,8 +7,6 @@ public class Owl_Fire_Bolt : MonoBehaviour
     private int projectileDamage = 1;
     private Transform target;
     private float speed = 6f;
-    public Transform projectileTransform;
-    private Vector2 projectileMovementSpotMultiplied;
     private bool projectileOutOfBounds;
     private float xLeftBound = -7f;
     private float xRightBound = 10f;
@@ -30,7 +27,7 @@ public class Owl_Fire_Bolt : MonoBehaviour
 
     private void Update()
     {
-        //projectileTransform.position = Vector2.MoveTowards(projectileTransform.position, projectileMovementSpotMultiplied, speed * Time.deltaTime);
+
 
         
 
@@ -53,8 +50,9 @@ public class Owl_Fire_Bolt : MonoBehaviour
                 
             }
 
+            Destroy(rb);
             Destroy(gameObject);
-
+            
         }
     }
 

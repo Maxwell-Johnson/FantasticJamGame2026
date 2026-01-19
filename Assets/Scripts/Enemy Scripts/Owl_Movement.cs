@@ -1,12 +1,8 @@
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Owl_Movement : MonoBehaviour
 {
-
-    private float xMoveTracker;
-    private float yMoveTracker;
 
     public Rigidbody2D rb;
     public Transform owlTransform;
@@ -17,7 +13,6 @@ public class Owl_Movement : MonoBehaviour
     private int direction = 1;
     private Vector2 endPointReference;
     private Vector2 startPointReference;
-    private Vector2 velocity = Vector2.zero;
     private bool owlIsInitialized = false;
     public bool owlInPosition { get; private set; } = false;
     private int stopPointNumber;
@@ -46,7 +41,13 @@ public class Owl_Movement : MonoBehaviour
         {
             stopPointNumber = Random.Range(1, totalSpotPoints + 1);
             stopPointScript = GameObject.FindGameObjectWithTag("Owl Stop Point " + stopPointNumber).GetComponent<Owl_Stop_Point_Script>();
-            if (!stopPointScript.spotOccupied)
+            if (stopPointScript == null)
+            {
+                Destroy(startPoint);
+                Destroy(endPoint);
+                gameObject.GetComponent<Enemy_Properties>().Destroy();
+            }
+            else if (!stopPointScript.spotOccupied)
             {
                 owlFindingParking = false;
             }
@@ -54,6 +55,13 @@ public class Owl_Movement : MonoBehaviour
         stopPointScript.spotOccupied = true;
         spotPointTarget = new Vector2(Random.Range(-15f, 38.5f) * .1f, yPositionList[stopPointNumber - 1]);
         owlMovingToSpot = true;
+    }
+
+    private void OnDestroy()
+    {
+        Destroy(startPoint);
+        Destroy(endPoint);
+
     }
     // Update is called once per frame
     void Update()

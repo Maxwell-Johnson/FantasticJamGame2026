@@ -1,6 +1,6 @@
-using System.Xml.Xsl;
+
 using UnityEngine;
-using UnityEngine.EventSystems;
+
 
 public class Soul_Movement_Script : MonoBehaviour
 {
@@ -40,6 +40,10 @@ public class Soul_Movement_Script : MonoBehaviour
         if (transform.position.y < deadZone) GetComponent<Enemy_Properties>().Die();
 
     }
+    private void OnDestroy()
+    {
+        Destroy(colliderObject);
+    }
     private void Swim()
     {
         rb.linearVelocity = new Vector2(0, -1) * moveSpeed;
@@ -47,14 +51,20 @@ public class Soul_Movement_Script : MonoBehaviour
 
     private void PopOutOfWater()
     {
+        inWater = false;
         anim.SetBool("playerInRange", true);
-        colliderObject.SetActive(true);
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.spiritAttack);
+        if (gameObject.GetComponent<Enemy_Properties>().colliderTurnedOff == false)
+        {
+            colliderObject.SetActive(true);
+        }
+        
     }
 
     private void DonePopingOutOfWater()
     {
         
-        inWater = false;
+        
         anim.SetBool("outOfWater", true);
     }
     

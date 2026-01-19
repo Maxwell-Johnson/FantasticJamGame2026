@@ -1,6 +1,4 @@
 using System.Collections;
-using TMPro;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Enemy_Properties : MonoBehaviour
@@ -14,6 +12,7 @@ public class Enemy_Properties : MonoBehaviour
     public bool rangedEnemy;
     public bool meleeEnemy;
     public bool soulEnemy;
+    
 
     private Health playerHealth;
 
@@ -23,12 +22,14 @@ public class Enemy_Properties : MonoBehaviour
     private GameObject spawner;
 
     public bool enemyTookDamage { get; private set; } = false;
+    public bool colliderTurnedOff;
     private float enemyInvulnerabilityTime = 0.5f;
 
 
 
     public GameObject skullPrefab;
 
+    
     IEnumerator EnemyTookDamage(float enemyInvulnerability)
     {
         enemyTookDamage = true;
@@ -36,6 +37,10 @@ public class Enemy_Properties : MonoBehaviour
         enemyTookDamage = false;
     }
 
+    private void OnDestroy()
+    {
+        
+    }
     private void Awake()
     {
         if (rangedEnemy)
@@ -57,6 +62,7 @@ public class Enemy_Properties : MonoBehaviour
     }
     void Start()
     {
+        colliderTurnedOff = false;
         if (gameObject.CompareTag("Melee Enemy"))
         {
             currentHealth = meleeMaxHealth; //Sets current health to established max health
@@ -76,13 +82,29 @@ public class Enemy_Properties : MonoBehaviour
 
 
         playerHealth.TakeDamage(attackDamage);
+        if (soulEnemy)
+        {
+            gameObject.GetComponent<Soul_Movement_Script>().colliderObject.SetActive(false);
+            colliderTurnedOff = true;
+
+        }
     }
     public void TakeDamage(float damage, Transform weaponTransform)
     {
+
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.playerHitEnemy);
         currentHealth -= damage;
         
         if (currentHealth <= 0)
         {
+            if (meleeEnemy)
+            {
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.wolfDeath);
+            }
+            else if (rangedEnemy)
+            {
+                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.owlDeath);
+            }
             
             Die();
         }
@@ -115,6 +137,12 @@ public class Enemy_Properties : MonoBehaviour
 
         Stats_Manager.Instance.EnemyDefeated();
 
+        RemoveFromList();
+        Destroy(gameObject); //if health 0, dead
+    }
+
+    public void Destroy()
+    {
         RemoveFromList();
         Destroy(gameObject); //if health 0, dead
     }

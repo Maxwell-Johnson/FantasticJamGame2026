@@ -1,4 +1,4 @@
-using Unity.Cinemachine;
+
 using UnityEngine;
 
 public class Skull_Pickup : MonoBehaviour
@@ -31,6 +31,7 @@ public class Skull_Pickup : MonoBehaviour
 
         if (gameObject.transform.position.y <= deadzone)
         {
+            Destroy(rb);
             Destroy(gameObject);
         }
     }

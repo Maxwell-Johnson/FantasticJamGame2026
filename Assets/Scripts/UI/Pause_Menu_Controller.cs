@@ -14,7 +14,7 @@ public class Pause_Menu_Controller : MonoBehaviour
         Game_Manager.OnGameStateChanged += SetPauseMenuDeactive;
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         Game_Manager.OnGameStateChanged -= SetPauseMenuActive;
         Game_Manager.OnGameStateChanged -= SetPauseMenuDeactive;

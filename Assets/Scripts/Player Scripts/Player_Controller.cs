@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Data.Common;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
+
 
 public class Player_Controller : MonoBehaviour
 {
@@ -75,6 +74,7 @@ public class Player_Controller : MonoBehaviour
         if (attackAction.WasPressedThisFrame() && canAttack)
         {
             StartCoroutine(Attack(attackCooldown));
+            Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.swingWeapon);
         }
 
         
