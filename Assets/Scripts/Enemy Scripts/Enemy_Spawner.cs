@@ -17,6 +17,7 @@ public class Enemy_Spawner : MonoBehaviour
     private float timer = 0;
     private int maxSpawnAmount = 3;
     private float soulSpawnXValue;
+    private float distanceTracker;
 
     private int spawnerLocationNumber;
 
@@ -39,6 +40,12 @@ public class Enemy_Spawner : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        if (soulEnemy)
+        {
+            spawnRate = 0;
+            if (Stats_Manager.Instance.distancesTravelled >= 500 && Stats_Manager.Instance.distancesTravelled <= 2000) spawnRate = 1500 - Stats_Manager.Instance.distancesTravelled / 100;
+        }
   
         //Checks if enough time has passed between obstacle spawns
         if (timer < spawnRate)
