@@ -17,7 +17,7 @@ public class DistanceTracker : MonoBehaviour
             distanceTravelledNum = (distanceTravelledInt * speed)/4;
             Stats_Manager.Instance.DistanceTravelled(distanceTravelledNum);
             secondsCounter = 0;
-            Debug.Log(Time.time);
+
         }
 
     }

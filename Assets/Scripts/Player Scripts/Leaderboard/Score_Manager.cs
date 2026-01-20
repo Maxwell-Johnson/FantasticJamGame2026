@@ -19,6 +19,7 @@ public class Score_Manager : MonoBehaviour
     }
     public void submitScore()
     {
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
         playerLeaderboard.getLeaderboard();
         submitScoreEvent.Invoke(inputName.text, int.Parse(scoreText.text));
         playerLeaderboard.getLeaderboard();

@@ -30,6 +30,7 @@ public class Enemy_Properties : MonoBehaviour
     public GameObject skullPrefab;
 
     
+    
     IEnumerator EnemyTookDamage(float enemyInvulnerability)
     {
         enemyTookDamage = true;
@@ -39,10 +40,13 @@ public class Enemy_Properties : MonoBehaviour
 
     private void OnDestroy()
     {
-        
+        Game_Manager.OnGameStateChanged -= Destroy;
     }
     private void Awake()
     {
+
+        Game_Manager.OnGameStateChanged += Destroy;
+
         if (rangedEnemy)
         {
 
@@ -141,10 +145,14 @@ public class Enemy_Properties : MonoBehaviour
         Destroy(gameObject); //if health 0, dead
     }
 
-    public void Destroy()
+    public void Destroy(GameState gameState)
     {
-        RemoveFromList();
-        Destroy(gameObject); //if health 0, dead
+        if (gameState == GameState.PlayerDead || gameState == GameState.GameReset || gameState == GameState.MainMenu)
+        {
+            RemoveFromList();
+            Destroy(gameObject); //if health 0, dead
+        }
+        
     }
 
     private void RemoveFromList()

@@ -7,7 +7,9 @@ public class Main_Menu_Controller : MonoBehaviour
     public string LeaderboardsSceneName;
     public void OnStartClick()
     {
+        Game_Manager.Instance.UpdateGameState(GameState.GameRunning);
         SceneManager.LoadScene(StartSceneName);
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
     }
 
     public void OnExitClick()
@@ -20,11 +22,17 @@ public class Main_Menu_Controller : MonoBehaviour
 
     public void OnSettingsClick()
     {
-       //Settings Menu Code
+        //Settings Menu Code
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
     }
 
     public void OnLeaderboardsClick()
     {
-        SceneManager.LoadScene(LeaderboardsSceneName);
+        if (LeaderboardsSceneName != null)
+        {
+            //SceneManager.LoadScene(LeaderboardsSceneName);
+        }
+        
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
     }
 }

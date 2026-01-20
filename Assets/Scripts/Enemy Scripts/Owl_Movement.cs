@@ -25,8 +25,11 @@ public class Owl_Movement : MonoBehaviour
     // y 0 - 5.5 - 2.6 - 4.3 - 1.5
 
     public List<float> yPositionList = new List<float>();
-    
 
+    private void Awake()
+    {
+        Game_Manager.OnGameStateChanged += PauseSound;
+    }
     private void Start()
     {
         yPositionList.Add(2.5f);
@@ -43,9 +46,10 @@ public class Owl_Movement : MonoBehaviour
             stopPointScript = GameObject.FindGameObjectWithTag("Owl Stop Point " + stopPointNumber).GetComponent<Owl_Stop_Point_Script>();
             if (stopPointScript == null)
             {
+                owlFindingParking = false;
                 Destroy(startPoint);
                 Destroy(endPoint);
-                gameObject.GetComponent<Enemy_Properties>().Destroy();
+                gameObject.GetComponent<Enemy_Properties>().Destroy(Game_Manager.Instance.state);
             }
             else if (!stopPointScript.spotOccupied)
             {
@@ -61,6 +65,7 @@ public class Owl_Movement : MonoBehaviour
     {
         Destroy(startPoint);
         Destroy(endPoint);
+        Game_Manager.OnGameStateChanged += PauseSound;
 
     }
     // Update is called once per frame
@@ -131,5 +136,17 @@ public class Owl_Movement : MonoBehaviour
     void moveOwlToStrafeSpot()
     {
         owlTransform.position = Vector2.MoveTowards(owlTransform.position, spotPointTarget, positioningSpeed * Time.deltaTime);
+    }
+
+    private void PauseSound(GameState gameState)
+    {
+        if (gameState == GameState.GamePaused && gameObject != null)
+        {
+            GetComponent<AudioSource>().Pause();
+        }
+        else if (gameState == GameState.GameResumed && gameObject != null)
+        {
+            GetComponent<AudioSource>().UnPause();
+        }
     }
 }

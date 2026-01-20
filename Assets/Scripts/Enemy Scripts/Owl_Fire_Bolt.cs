@@ -15,6 +15,16 @@ public class Owl_Fire_Bolt : MonoBehaviour
     private Vector2 direction;
 
 
+
+    private void Awake()
+    {
+        Game_Manager.OnGameStateChanged += DestroySelf;
+    }
+
+    private void OnDestroy()
+    {
+        Game_Manager.OnGameStateChanged -= DestroySelf;
+    }
     private void Start()
     {
         rb = gameObject.GetComponent<Rigidbody2D>();
@@ -50,9 +60,8 @@ public class Owl_Fire_Bolt : MonoBehaviour
                 
             }
 
-            Destroy(rb);
-            Destroy(gameObject);
-            
+            DestroySelf(Game_Manager.Instance.state);
+
         }
     }
 
@@ -62,13 +71,21 @@ public class Owl_Fire_Bolt : MonoBehaviour
     {
         if (gameObject.transform.position.x < xLeftBound || gameObject.transform.position.x > xRightBound)
         {
-            Destroy(gameObject);
+            DestroySelf(Game_Manager.Instance.state);
         }
         else if (gameObject.transform.position.y < ySouthBound || gameObject.transform.position.x > yNorthBound)
         {
-            Destroy(gameObject);
+            DestroySelf(Game_Manager.Instance.state);
         }
 
     }
 
+    private void DestroySelf(GameState gameState)
+    {
+        if (gameState == GameState.PlayerDead || gameState == GameState.GameReset || gameState == GameState.MainMenu)
+        {
+            Destroy(rb);
+            Destroy(gameObject);
+        }
+    }
 }

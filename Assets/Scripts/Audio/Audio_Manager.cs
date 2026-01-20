@@ -29,6 +29,8 @@ public class Audio_Manager : MonoBehaviour
     [SerializeField] public AudioClip flowingWater;
     [SerializeField] public AudioClip owlDeath;
     [SerializeField] public AudioClip playerHitEnemy;
+    [SerializeField] public AudioClip pause;
+    [SerializeField] public AudioClip unpause;
 
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class Audio_Manager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
-        Game_Manager.OnGameStateChanged += ConfigureMusic;
+        
     }
 
     private void OnDisable()
@@ -52,8 +54,12 @@ public class Audio_Manager : MonoBehaviour
 
     private void Start()
     {
-        musicSource.clip = mainTheme;
-        musicSource.Play();
+        Game_Manager.OnGameStateChanged += ConfigureMusic;
+        if (Game_Manager.Instance.state == GameState.MainMenu)
+        {
+            musicSource.clip = mainMenuTheme;
+            musicSource.Play();
+        }
     }
 
     public void PlaySFX(AudioClip clip)
@@ -77,6 +83,16 @@ public class Audio_Manager : MonoBehaviour
             musicSource.UnPause();
         }
         else if (newState == GameState.GameReset)
+        {
+            musicSource.clip = mainTheme;
+            musicSource.Play();
+        }
+        else if (newState == GameState.MainMenu)
+        {
+            musicSource.clip = mainMenuTheme;
+            musicSource.Play();
+        }
+        else if (newState == GameState.GameRunning)
         {
             musicSource.clip = mainTheme;
             musicSource.Play();

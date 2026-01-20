@@ -15,6 +15,7 @@ public class DistanceCounterScript : MonoBehaviour
         {
             distanceNum = Stats_Manager.Instance.distancesTravelled;
             distanceText.text = distanceNum.ToString("F0");
+
         }
     }
 }

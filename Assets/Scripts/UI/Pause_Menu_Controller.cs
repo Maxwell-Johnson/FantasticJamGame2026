@@ -25,6 +25,7 @@ public class Pause_Menu_Controller : MonoBehaviour
         if (gameState == GameState.GamePaused)
         {
             pauseMenu.SetActive(true);
+            Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.pause);
         }
     }
 
@@ -33,15 +34,20 @@ public class Pause_Menu_Controller : MonoBehaviour
         if (gameState == GameState.GameResumed)
         {
             pauseMenu.SetActive(false);
+            Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.unpause);
         }
     }
     public void OnClickSettings()
     {
         // Settings Menu Code Here
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
     }
 
     public void OnClickMainMenu()
     {
+        Game_Manager.Instance.UpdateGameState(GameState.GameResumed);
+        Game_Manager.Instance.UpdateGameState(GameState.MainMenu);
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.buttonClick);
         SceneManager.LoadScene(MainMenuSceneName);
     }
 

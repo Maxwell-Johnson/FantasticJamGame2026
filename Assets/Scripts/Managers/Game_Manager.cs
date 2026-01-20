@@ -41,6 +41,7 @@ public class Game_Manager : MonoBehaviour
         switch (newState)
         {
             case GameState.GameRunning:
+                Time.timeScale = 1;
                 break;
             case GameState.GamePaused:
                 Time.timeScale = 0;
@@ -53,6 +54,9 @@ public class Game_Manager : MonoBehaviour
                 Time.timeScale = 0;
                 break;
             case GameState.GameReset:
+                Time.timeScale = 1;
+                break;
+            case GameState.MainMenu:
                 break;
         }//
 
@@ -72,6 +76,7 @@ public class Game_Manager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
 
+        state = GameState.MainMenu;
         Resources.UnloadUnusedAssets();
     }
 
@@ -92,13 +97,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (restartAction.WasPressedThisFrame() && state != GameState.PlayerDead)
         {
-            Debug.Log(state);
-            currentScene = SceneManager.GetActiveScene();
-            Debug.Log("RESTART");
-            SceneManager.LoadScene(currentScene.name);
-            UpdateGameState(GameState.GameReset);
-            UpdateGameState(GameState.GameRunning);
-
+            RestartGame();
         }
 
         if (pauseAction.WasPressedThisFrame())
@@ -113,6 +112,16 @@ public class Game_Manager : MonoBehaviour
             }
         }
     }
+
+    public void RestartGame()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(currentScene.name);
+        UpdateGameState(GameState.GameReset);
+        UpdateGameState(GameState.GameRunning);
+    }
+
+
 }
 
 
@@ -122,6 +131,7 @@ public enum GameState
     GamePaused,
     GameResumed,
     PlayerDead,
-    GameReset
+    GameReset,
+    MainMenu
 
 }

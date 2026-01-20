@@ -21,7 +21,14 @@ public class Health : MonoBehaviour
     {
         currentHealth = maxHealth;
     }
-    
+
+    private void Update()
+    {
+        if (gameObject.transform.position.y <= -14)
+        {
+            PlayerDeath();
+        }
+    }
     public void TakeDamage(float damage)
     {
 
@@ -32,9 +39,7 @@ public class Health : MonoBehaviour
             currentHealth = Mathf.Clamp(currentHealth - damage, 0, maxHealth); //Clamp makes sure this value is never allowed to go below 0 when subtracing
             if (currentHealth == 0)
             {
-                Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.playerDeath);
-                Game_Manager.Instance.UpdateGameState(GameState.PlayerDead);
-                Destroy(gameObject);
+                PlayerDeath();
             }
             else
             {
@@ -49,5 +54,12 @@ public class Health : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Obstacle" && !playerTookDamage) TakeDamage(1); //If collide with obstacle, ouchie
+    }
+
+    private void PlayerDeath()
+    {
+        Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.playerDeath);
+        Game_Manager.Instance.UpdateGameState(GameState.PlayerDead);
+        Destroy(gameObject);
     }
 }

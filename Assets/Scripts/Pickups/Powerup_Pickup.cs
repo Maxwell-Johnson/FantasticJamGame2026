@@ -31,6 +31,7 @@ public class Powerup_Pickup : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
 
         initializePowerup();
+
     }
 
 
@@ -59,7 +60,11 @@ public class Powerup_Pickup : MonoBehaviour
 
     private void RemoveFromList()
     {
-        spawner.GetComponent<Powerup_Spawner>().powerupList.Remove(gameObject);
+        if (gameObject != null)
+        {
+            spawner.GetComponent<Powerup_Spawner>().powerupList.Remove(gameObject);
+        }
+        
     }
 
     private void DeletePowerup()
@@ -96,6 +101,8 @@ public class Powerup_Pickup : MonoBehaviour
         spriteRend.sprite = spriteGrabbed;
 
     }
+
+
 }
 
 

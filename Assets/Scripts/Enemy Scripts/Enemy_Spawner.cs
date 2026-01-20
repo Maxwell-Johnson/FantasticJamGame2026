@@ -32,7 +32,6 @@ public class Enemy_Spawner : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        
         spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
         SpawnEnemy();
     }
@@ -89,16 +88,16 @@ public class Enemy_Spawner : MonoBehaviour
         }
         else if (!rangedSpawner && !meleeSpawner && soulSpawner)
         {
-
-            if (player.GetComponent<Player_Controller>().rb.linearVelocity.x > 0.01)
+           
+            if (player.GetComponent<Rigidbody2D>().linearVelocity.x > 0.01)
             {
                 soulSpawnXValue = player.GetComponent<Player_Controller>().transform.position.x + 2;
             }
-            else if (player.GetComponent<Player_Controller>().rb.linearVelocity.x < -0.01)
+            else if (player.GetComponent<Rigidbody2D>().linearVelocity.x < -0.01)
             {
                 soulSpawnXValue = player.GetComponent<Player_Controller>().transform.position.x - 2;
             }
-            else if (player.GetComponent<Player_Controller>().rb.linearVelocity.x == 0)
+            else if (player.GetComponent<Rigidbody2D>().linearVelocity.x == 0)
             {
                 soulSpawnXValue = player.GetComponent<Player_Controller>().transform.position.x;
             }

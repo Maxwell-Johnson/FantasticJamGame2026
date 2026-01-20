@@ -156,14 +156,18 @@ public class Powerups_Manager : MonoBehaviour
 
     private void increasedDamageEffect()
     {
-        originalWeaponColor = playerWeaponRegularSpriteRend.color;
-        originalDamageMod = playerWeaponRegularScript.damage;
+        if (playerWeaponRegularSpriteRend != null)
+        {
+            originalWeaponColor = playerWeaponRegularSpriteRend.color;
+            originalDamageMod = playerWeaponRegularScript.damage;
 
-        playerWeaponRegularSpriteRend.color = Color.red;
-        playerWeaponRegularScript.damage = increasedDamageMod;
+            playerWeaponRegularSpriteRend.color = Color.red;
+            playerWeaponRegularScript.damage = increasedDamageMod;
 
-        playerWeaponLargerSpriteRend.color = Color.red;
-        playerWeaponLargerScript.damage = increasedDamageMod;
+            playerWeaponLargerSpriteRend.color = Color.red;
+            playerWeaponLargerScript.damage = increasedDamageMod;
+        }
+        
     }
 
     private void increasedDamageRevert()

@@ -93,7 +93,7 @@ public class Player_Leaderboard : MonoBehaviour
     // Remember to reference this whenever game over happens
     public void loadLeaderboardScreen()
     {
-        
+        scoreTextUpdater.updateCurrentScore(playerScoreText, currentPlayerScore);
         leaderboardScreenToggle.SetActive(true);
         scoreManager.setScoreText(playerScoreText);
         scoreTextUpdater.updateCurrentScore(playerScoreText, currentPlayerScore);
