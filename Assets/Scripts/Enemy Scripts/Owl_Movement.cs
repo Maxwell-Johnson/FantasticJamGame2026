@@ -21,10 +21,12 @@ public class Owl_Movement : MonoBehaviour
     private Vector2 spotPointTarget;
     private int totalSpotPoints = 5;
     private Owl_Stop_Point_Script stopPointScript;
+    private AudioSource audioSource;
 
     // y 0 - 5.5 - 2.6 - 4.3 - 1.5
 
     public List<float> yPositionList = new List<float>();
+
 
     private void Awake()
     {
@@ -37,25 +39,31 @@ public class Owl_Movement : MonoBehaviour
         yPositionList.Add(5.5f);
         yPositionList.Add(7f);
         yPositionList.Add(8.5f);
+        audioSource = GetComponent<AudioSource>();
         int yPositionListCount = yPositionList.Count;
         owlIsInitialized = false;
         owlFindingParking = true;
-        while (owlFindingParking)
+
+        for (int i = 0; i < 50; i++)
         {
             stopPointNumber = Random.Range(1, totalSpotPoints + 1);
             stopPointScript = GameObject.FindGameObjectWithTag("Owl Stop Point " + stopPointNumber).GetComponent<Owl_Stop_Point_Script>();
-            if (stopPointScript == null)
+
+            if (stopPointScript && !stopPointScript.spotOccupied)
             {
+                stopPointNumber = stopPointScript.spotNumber;
                 owlFindingParking = false;
-                Destroy(startPoint);
-                Destroy(endPoint);
-                gameObject.GetComponent<Enemy_Properties>().Destroy(Game_Manager.Instance.state);
+                break;
             }
-            else if (!stopPointScript.spotOccupied)
-            {
-                owlFindingParking = false;
-            }
+
         }
+        if (owlFindingParking)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+
         stopPointScript.spotOccupied = true;
         spotPointTarget = new Vector2(Random.Range(-15f, 38.5f) * .1f, yPositionList[stopPointNumber - 1]);
         owlMovingToSpot = true;
@@ -63,9 +71,7 @@ public class Owl_Movement : MonoBehaviour
 
     private void OnDestroy()
     {
-        Destroy(startPoint);
-        Destroy(endPoint);
-        Game_Manager.OnGameStateChanged += PauseSound;
+        Game_Manager.OnGameStateChanged -= PauseSound;
 
     }
     // Update is called once per frame
@@ -140,13 +146,15 @@ public class Owl_Movement : MonoBehaviour
 
     private void PauseSound(GameState gameState)
     {
-        if (gameState == GameState.GamePaused && gameObject != null)
+        if (gameState == GameState.GamePaused)
         {
-            GetComponent<AudioSource>().Pause();
+            audioSource.Pause();
         }
-        else if (gameState == GameState.GameResumed && gameObject != null)
+        else if (gameState == GameState.GameResumed)
         {
-            GetComponent<AudioSource>().UnPause();
+            audioSource.UnPause();
         }
+
+        
     }
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ecc1c374ccaeb2d4e865d816120f4cbd
+guid: 652832c0081292a42a504fb1628f5b94
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8756833947817040220
-    second: Player_On_Boat_0
+      213: 6338463366555106324
+    second: Player-Slash_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_On_Boat_0
+      name: Player-Slash_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +115,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5957b07416868970800000000000000
-      internalID: 8756833947817040220
+      spriteID: 41cf75969deb6f750800000000000000
+      internalID: 6338463366555106324
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_1
+      name: Player-Slash_1
       rect:
         serializedVersion: 2
         x: 160
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c57062e7ef13c8343b30fbf22db6a040
-      internalID: 1627601559
+      spriteID: 8581c27fc01c7a641bb35d3ddfdcd5e6
+      internalID: 522030892
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_2
+      name: Player-Slash_2
       rect:
         serializedVersion: 2
         x: 320
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 60c524d1c1b62da48b75852f0a04ae7e
-      internalID: 1160187082
+      spriteID: 5d41751b5fd2f3e4ca9eccce8bfd598a
+      internalID: 1114055456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_3
+      name: Player-Slash_3
       rect:
         serializedVersion: 2
         x: 480
@@ -181,140 +181,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adf7078a853bc524d8a62900a0d84844
-      internalID: 1201455497
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_4
-      rect:
-        serializedVersion: 2
-        x: 640
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7e85631ba922f54b8641283231df247
-      internalID: -1309936316
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_5
-      rect:
-        serializedVersion: 2
-        x: 800
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22d4bf8cd90cda64bbaa3d88ec8d52c8
-      internalID: 230892558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_6
-      rect:
-        serializedVersion: 2
-        x: 960
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b62ad0acab5fa8e43b680645e483695b
-      internalID: -1504188748
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_7
-      rect:
-        serializedVersion: 2
-        x: 1120
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdcc61884206de5489a13a0c7e97bd7c
-      internalID: -1750666537
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_8
-      rect:
-        serializedVersion: 2
-        x: 1280
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1d931ea59d879f44a953c67c7fd9dc8
-      internalID: -1046402609
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_On_Boat_9
-      rect:
-        serializedVersion: 2
-        x: 1440
-        y: 0
-        width: 160
-        height: 160
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8652ae440009354eb19ec0e52da385e
-      internalID: 1195597102
+      spriteID: 5b88a9b853d2773439f578c31722c68e
+      internalID: -1482597366
       vertices: []
       indices: 
       edges: []
@@ -323,7 +191,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 011487c4ede80ad48911a8b62d2dffa5
+    spriteID: 5b5ec5591f79d0540a494b5a3d438580
     internalID: 0
     vertices: []
     indices: 
@@ -335,16 +203,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":160.0,"y":160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Player_On_Boat_0: 8756833947817040220
-      Player_On_Boat_1: 1627601559
-      Player_On_Boat_2: 1160187082
-      Player_On_Boat_3: 1201455497
-      Player_On_Boat_4: -1309936316
-      Player_On_Boat_5: 230892558
-      Player_On_Boat_6: -1504188748
-      Player_On_Boat_7: -1750666537
-      Player_On_Boat_8: -1046402609
-      Player_On_Boat_9: 1195597102
+      Player-Slash_0: 6338463366555106324
+      Player-Slash_1: 522030892
+      Player-Slash_2: 1114055456
+      Player-Slash_3: -1482597366
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

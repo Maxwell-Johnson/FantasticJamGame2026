@@ -23,3 +23,9 @@ Thes ranges need to become a ratio based on distance
 0 - 500
 3f - 11f
 
+2000, 4 seconds
+500. 10 seconds
+
+c - 2000 / x = 4
+c - 500 / x = 10
+

@@ -1,10 +1,37 @@
 fileFormatVersion: 2
-guid: ecc1c374ccaeb2d4e865d816120f4cbd
+guid: fdd6dedc084af23428591fce38b1ca5d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8756833947817040220
-    second: Player_On_Boat_0
+      213: -3680209304067589270
+    second: heartAnim_0
+  - first:
+      213: -5850571529933260993
+    second: heartAnim_1
+  - first:
+      213: 1040556543090903419
+    second: heartAnim_2
+  - first:
+      213: -196418387269520954
+    second: heartAnim_3
+  - first:
+      213: -5212025892228431409
+    second: heartAnim_4
+  - first:
+      213: -2762570173100896576
+    second: heartAnim_5
+  - first:
+      213: 5985732788653270012
+    second: heartAnim_6
+  - first:
+      213: 3572636138884113144
+    second: heartAnim_7
+  - first:
+      213: 2077857078282007573
+    second: heartAnim_8
+  - first:
+      213: 1188139901971999113
+    second: heartAnim_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +73,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -100,221 +127,221 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_On_Boat_0
+      name: heartAnim_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 1
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c5957b07416868970800000000000000
-      internalID: 8756833947817040220
+      spriteID: a6bb6f3f2254decc0800000000000000
+      internalID: -3680209304067589270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_1
+      name: heartAnim_1
       rect:
         serializedVersion: 2
-        x: 160
+        x: 37
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: c57062e7ef13c8343b30fbf22db6a040
-      internalID: 1627601559
+      spriteID: f377051f0389ecea0800000000000000
+      internalID: -5850571529933260993
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_2
+      name: heartAnim_2
       rect:
         serializedVersion: 2
-        x: 320
+        x: 73
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 60c524d1c1b62da48b75852f0a04ae7e
-      internalID: 1160187082
+      spriteID: b7944afa9acc07e00800000000000000
+      internalID: 1040556543090903419
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_3
+      name: heartAnim_3
       rect:
         serializedVersion: 2
-        x: 480
+        x: 109
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: adf7078a853bc524d8a62900a0d84844
-      internalID: 1201455497
+      spriteID: 6c1f177748e264df0800000000000000
+      internalID: -196418387269520954
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_4
+      name: heartAnim_4
       rect:
         serializedVersion: 2
-        x: 640
+        x: 145
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a7e85631ba922f54b8641283231df247
-      internalID: -1309936316
+      spriteID: fc10695c01a2ba7b0800000000000000
+      internalID: -5212025892228431409
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_5
+      name: heartAnim_5
       rect:
         serializedVersion: 2
-        x: 800
+        x: 181
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: 22d4bf8cd90cda64bbaa3d88ec8d52c8
-      internalID: 230892558
+      spriteID: 0ce4b35701169a9d0800000000000000
+      internalID: -2762570173100896576
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_6
+      name: heartAnim_6
       rect:
         serializedVersion: 2
-        x: 960
+        x: 217
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: b62ad0acab5fa8e43b680645e483695b
-      internalID: -1504188748
+      spriteID: cf3261ce148911350800000000000000
+      internalID: 5985732788653270012
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_7
+      name: heartAnim_7
       rect:
         serializedVersion: 2
-        x: 1120
+        x: 253
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: cdcc61884206de5489a13a0c7e97bd7c
-      internalID: -1750666537
+      spriteID: 8f229e1c3ad849130800000000000000
+      internalID: 3572636138884113144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_8
+      name: heartAnim_8
       rect:
         serializedVersion: 2
-        x: 1280
+        x: 289
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: a1d931ea59d879f44a953c67c7fd9dc8
-      internalID: -1046402609
+      spriteID: 514b705f00806dc10800000000000000
+      internalID: 2077857078282007573
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_On_Boat_9
+      name: heartAnim_9
       rect:
         serializedVersion: 2
-        x: 1440
+        x: 325
         y: 0
-        width: 160
-        height: 160
+        width: 34
+        height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: 0
+      tessellationDetail: -1
       bones: []
-      spriteID: d8652ae440009354eb19ec0e52da385e
-      internalID: 1195597102
+      spriteID: 989228022fe1d7010800000000000000
+      internalID: 1188139901971999113
       vertices: []
       indices: 
       edges: []
@@ -323,7 +350,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 011487c4ede80ad48911a8b62d2dffa5
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -331,20 +358,18 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries:
-      - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":160.0,"y":160.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+      entries: []
     nameFileIdTable:
-      Player_On_Boat_0: 8756833947817040220
-      Player_On_Boat_1: 1627601559
-      Player_On_Boat_2: 1160187082
-      Player_On_Boat_3: 1201455497
-      Player_On_Boat_4: -1309936316
-      Player_On_Boat_5: 230892558
-      Player_On_Boat_6: -1504188748
-      Player_On_Boat_7: -1750666537
-      Player_On_Boat_8: -1046402609
-      Player_On_Boat_9: 1195597102
+      heartAnim_0: -3680209304067589270
+      heartAnim_1: -5850571529933260993
+      heartAnim_2: 1040556543090903419
+      heartAnim_3: -196418387269520954
+      heartAnim_4: -5212025892228431409
+      heartAnim_5: -2762570173100896576
+      heartAnim_6: 5985732788653270012
+      heartAnim_7: 3572636138884113144
+      heartAnim_8: 2077857078282007573
+      heartAnim_9: 1188139901971999113
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

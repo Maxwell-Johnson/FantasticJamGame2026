@@ -7,10 +7,10 @@ public class Powerup_Spawner : MonoBehaviour
     public GameObject powerupPrefab;
     public GameObject powerupsFolder;
     public float spawnRate;
-    public float maxSpawnRate = 7f;
-    public float minSpawnRate = 5f;
+    public float maxSpawnRate = 10f;
+    public float minSpawnRate = 17f;
     private float timer = 0;
-    private int maxSpawnAmount = 1;
+    private int maxSpawnAmount = 2;
 
 
     //Keeps track of all the spawns in a list
@@ -19,7 +19,6 @@ public class Powerup_Spawner : MonoBehaviour
     private void Start()
     {
         spawnRate = Random.Range(minSpawnRate, maxSpawnRate);
-        SpawnPowerup();
     }
 
     private void FixedUpdate()

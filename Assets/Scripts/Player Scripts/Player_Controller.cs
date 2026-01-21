@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -12,13 +13,14 @@ public class Player_Controller : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     InputAction moveAction;
     InputAction attackAction;
+    public Animator anim;
 
     #endregion
 
     #region MOVEMENT
 
-    public float moveSpeedX = 4f;
-    public float moveSpeedY = 6f;
+    public float moveSpeedX = 5f;
+    public float moveSpeedY = 7f;
     public Vector2 moveInput { get; private set; }
 
     private float playerPushSpeed;
@@ -29,9 +31,8 @@ public class Player_Controller : MonoBehaviour
 
     [SerializeField] public GameObject attack;
     [SerializeField] public GameObject largerAttack;
-    private float attackDuration = 0.2f;
-    private float attackCooldown = 0.8f;
-    private bool canAttack;
+    private float attackCooldown = 1f;
+    private float attackTimer;
 
     #endregion
 
@@ -48,10 +49,11 @@ public class Player_Controller : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        attackTimer = attackCooldown;
         rb = GetComponent<Rigidbody2D>(); //Gets the Rigidbody2D component from whatever this script is attached to.
         moveAction = InputSystem.actions.FindAction("Move");
         attackAction = InputSystem.actions.FindAction("Attack");
-        canAttack = true;
+
         
     }
 
@@ -71,36 +73,47 @@ public class Player_Controller : MonoBehaviour
         moveInput = moveAction.ReadValue<Vector2>(); //Grabs the vector2 value from the Input Actions system "Move" and set it to moveInput
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeedX, (moveInput.y * moveSpeedY) + playerPushSpeed); //Changes the x and y velocity values using x and y of moveInput times movespeed
 
-        if (attackAction.WasPressedThisFrame() && canAttack)
+        attackTimer += Time.deltaTime;
+        if (attackAction.WasPressedThisFrame() && attackTimer > attackCooldown)
         {
-            StartCoroutine(Attack(attackCooldown));
+            AttackOn(attackCooldown);
             Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.swingWeapon);
         }
 
         
     }
 
-
-    IEnumerator Attack(float attackCooldown)
+    private void AttackOn(float attackCooldown)
     {
-        canAttack = false;
+        attackTimer = 0;
+        anim.SetBool("isAttacking", true);
         if (Powerups_Manager.Instance.largerAttackIsActive)
         {
             largerAttack.SetActive(true);
-            yield return new WaitForSeconds(attackDuration);
-            largerAttack.SetActive(false);
+
         }
         else
         {
             attack.SetActive(true);
-            yield return new WaitForSeconds(attackDuration);
-            attack.SetActive(false);
+
         }
-        
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
+
+
     }
 
 
+    public void FinishAttack()
+    {
+        anim.SetBool("isAttacking", false);
+        if (Powerups_Manager.Instance.largerAttackIsActive)
+        {
 
+            largerAttack.SetActive(false);
+        }
+        else
+        {
+
+            attack.SetActive(false);
+        }
+    }
 }

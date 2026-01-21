@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Obstacle_Move
   log: 0
   boulder: 1
-  boulderSetSpeed: 3
+  boulderSetSpeed: 0
   moveSpeed: 0
 --- !u!212 &1262227440557250509
 SpriteRenderer:

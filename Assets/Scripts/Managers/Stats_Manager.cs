@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering.Universal.Internal;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 using static Game_Manager;
 
 public class Stats_Manager : MonoBehaviour
@@ -37,6 +38,7 @@ public class Stats_Manager : MonoBehaviour
         Game_Manager.OnGameStateChanged += ResetStats;
         Game_Manager.OnGameStateChanged += SendFinalScore;
 
+        leaderboard = GameObject.FindGameObjectWithTag("UI Canvas").GetComponentInChildren<Player_Leaderboard>();
 
     }
 
@@ -46,8 +48,13 @@ public class Stats_Manager : MonoBehaviour
     }
     private void SendFinalScore(GameState state)
     {
-        Debug.Log(finalScore);
-        leaderboard.SendPlayerScore(finalScore);
+        if (state == GameState.PlayerDead)
+        {
+            leaderboard = GameObject.FindGameObjectWithTag("UI Canvas").GetComponentInChildren<Player_Leaderboard>();
+            Debug.Log(finalScore);
+            leaderboard.SendPlayerScore(finalScore);
+        }
+        
     }
 
     private void OnDestroy()
@@ -97,7 +104,6 @@ public class Stats_Manager : MonoBehaviour
     public void CalculateScore()
     {
 
-         Debug.Log(distancesTravelled);
          float scoreMultiplier;
 
          scoreMultiplier = (distancesTravelled + 1000) / 1000;

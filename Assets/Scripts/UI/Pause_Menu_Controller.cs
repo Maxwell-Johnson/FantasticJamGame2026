@@ -8,10 +8,15 @@ public class Pause_Menu_Controller : MonoBehaviour
     public string MainMenuSceneName;
 
     public GameObject pauseMenu;
+
+    private GameObject pauseMenuReference;
+
     private void Awake()
     {
+        pauseMenuReference = pauseMenu;
         Game_Manager.OnGameStateChanged += SetPauseMenuActive;
         Game_Manager.OnGameStateChanged += SetPauseMenuDeactive;
+
     }
 
     private void OnDisable()
@@ -24,7 +29,7 @@ public class Pause_Menu_Controller : MonoBehaviour
     {
         if (gameState == GameState.GamePaused)
         {
-            pauseMenu.SetActive(true);
+            pauseMenuReference.SetActive(true);
             Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.pause);
         }
     }
@@ -33,7 +38,7 @@ public class Pause_Menu_Controller : MonoBehaviour
     {
         if (gameState == GameState.GameResumed)
         {
-            pauseMenu.SetActive(false);
+            pauseMenuReference.SetActive(false);
             Audio_Manager.Instance.PlaySFX(Audio_Manager.Instance.unpause);
         }
     }

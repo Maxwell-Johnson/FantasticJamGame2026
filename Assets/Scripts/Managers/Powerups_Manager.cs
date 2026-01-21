@@ -23,7 +23,7 @@ public class Powerups_Manager : MonoBehaviour
     private float speedUpDuration = 10f;
     private bool speedUpIsActive;
     private float speedUpActiveTimer;
-    private float speedUpMultiplier = 2f;
+    private float speedUpMultiplier = 1.5f;
     private float originalSpeedX;
     private float originalSpeedY;
 
@@ -48,6 +48,9 @@ public class Powerups_Manager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+
+        
+        
     }
 
     // In update, manager is constanely checking if any powerup active timer has a value over 0.
@@ -156,15 +159,20 @@ public class Powerups_Manager : MonoBehaviour
 
     private void increasedDamageEffect()
     {
+        playerWeaponRegularScript = playerWeaponRegular.GetComponent<Weapon>();
+        playerWeaponLargerScript = playerWeaponLarger.GetComponent<Weapon>();
+        playerWeaponRegularSpriteRend = playerWeaponRegular.GetComponent<SpriteRenderer>();
+        playerWeaponRegularSpriteRend = playerWeaponLarger.GetComponent<SpriteRenderer>();
+
         if (playerWeaponRegularSpriteRend != null)
         {
-            originalWeaponColor = playerWeaponRegularSpriteRend.color;
+            //originalWeaponColor = playerWeaponRegularSpriteRend.color;
             originalDamageMod = playerWeaponRegularScript.damage;
 
-            playerWeaponRegularSpriteRend.color = Color.red;
+            //playerWeaponRegularSpriteRend.color = Color.red;
             playerWeaponRegularScript.damage = increasedDamageMod;
 
-            playerWeaponLargerSpriteRend.color = Color.red;
+            //playerWeaponLargerSpriteRend.color = Color.red;
             playerWeaponLargerScript.damage = increasedDamageMod;
         }
         
@@ -172,10 +180,16 @@ public class Powerups_Manager : MonoBehaviour
 
     private void increasedDamageRevert()
     {
-        playerWeaponRegularSpriteRend.color = originalWeaponColor;
+
+        playerWeaponRegularScript = playerWeaponRegular.GetComponent<Weapon>();
+        playerWeaponLargerScript = playerWeaponLarger.GetComponent<Weapon>();
+        playerWeaponRegularSpriteRend = playerWeaponRegular.GetComponent<SpriteRenderer>();
+        playerWeaponRegularSpriteRend = playerWeaponLarger.GetComponent<SpriteRenderer>();
+
+        //playerWeaponRegularSpriteRend.color = originalWeaponColor;
         playerWeaponRegularScript.damage = originalDamageMod;
 
-        playerWeaponLargerSpriteRend.color = originalWeaponColor;
+        //playerWeaponLargerSpriteRend.color = originalWeaponColor;
         playerWeaponLargerScript.damage = originalDamageMod;
     }
 
@@ -183,11 +197,13 @@ public class Powerups_Manager : MonoBehaviour
 
     private void speedUpEffect()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
         playerController.moveSpeedY *= speedUpMultiplier;
         playerController.moveSpeedX *= speedUpMultiplier;
     }
     private void speedUpRevert()
     {
+        playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Controller>();
         playerController.moveSpeedY /= speedUpMultiplier;
         playerController.moveSpeedX /= speedUpMultiplier;
     }

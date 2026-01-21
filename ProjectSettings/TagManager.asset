@@ -28,6 +28,8 @@ TagManager:
   - Soul Enemy Spawner
   - Soul Enemy
   - Wolf Attack Collider
+  - Player Attack Larger
+  - UI Canvas
   layers:
   - Default
   - TransparentFX

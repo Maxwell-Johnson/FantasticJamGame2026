@@ -60,9 +60,12 @@ public class Owl_Fire_Bolt : MonoBehaviour
                 
             }
 
-            DestroySelf(Game_Manager.Instance.state);
+            
 
         }
+
+        Destroy(rb);
+        Destroy(gameObject);
     }
 
 
@@ -71,11 +74,13 @@ public class Owl_Fire_Bolt : MonoBehaviour
     {
         if (gameObject.transform.position.x < xLeftBound || gameObject.transform.position.x > xRightBound)
         {
-            DestroySelf(Game_Manager.Instance.state);
+            Destroy(rb);
+            Destroy(gameObject);
         }
         else if (gameObject.transform.position.y < ySouthBound || gameObject.transform.position.x > yNorthBound)
         {
-            DestroySelf(Game_Manager.Instance.state);
+            Destroy(rb);
+            Destroy(gameObject);
         }
 
     }

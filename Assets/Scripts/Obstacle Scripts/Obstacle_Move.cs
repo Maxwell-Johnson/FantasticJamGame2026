@@ -7,12 +7,12 @@ public class Obstacle_Move : MonoBehaviour
     [SerializeField] bool log;
     [SerializeField] bool boulder;
 
-    public float boulderSetSpeed;
+    public float boulderSetSpeed = 3;
     public float moveSpeed;
     private float deadZone = -14f;
 
-    private float maxFallSpeed = 10f;
-    private float minFallSpeed = 0.8f;
+    private float maxFallSpeed = 8f;
+    private float minFallSpeed = 1f;
 
 
     private void Awake()
@@ -20,8 +20,16 @@ public class Obstacle_Move : MonoBehaviour
         Game_Manager.OnGameStateChanged += DestroySelf;
         moveSpeed = Random.Range(minFallSpeed, maxFallSpeed);
         //Debug.Log(moveSpeed);
+
+        if (boulder)
+        {
+            boulderSetSpeed = 3;    
+            if (Stats_Manager.Instance.distancesTravelled >= 500 && Stats_Manager.Instance.distancesTravelled <= 10000) boulderSetSpeed = (17125 - Stats_Manager.Instance.distancesTravelled) / 2375;
+            if (Stats_Manager.Instance.distancesTravelled > 10000) boulderSetSpeed = 7;
+        }
+
+
     }
-    // Update is called once per frame
 
     private void OnDestroy()
     {
@@ -33,13 +41,13 @@ public class Obstacle_Move : MonoBehaviour
         {
             transform.position = transform.position + (Vector3.down * moveSpeed) * Time.deltaTime; //Moves obstacles downward at a set move speed.
 
-            if (transform.position.y < deadZone) DestroySelf(Game_Manager.Instance.state); // Deletes objects once they go offscreen
+            if (transform.position.y < deadZone) Destroy(gameObject); ; // Deletes objects once they go offscreen
         }
         else if (boulder && !log)
         {
             transform.position = transform.position + (Vector3.down * boulderSetSpeed) * Time.deltaTime; //Moves obstacles downward at a set move speed.
 
-            if (transform.position.y < deadZone) DestroySelf(Game_Manager.Instance.state); // Deletes objects once they go offscreen
+            if (transform.position.y < deadZone) Destroy(gameObject); ; // Deletes objects once they go offscreen
         }
         else
         {
